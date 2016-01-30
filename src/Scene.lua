@@ -55,12 +55,11 @@ Scene.waitForInput = function( self )
 end
 
 Scene.setDialogSpeed = function( self, speed )
-	self.dialogSpeed = speed;
+	self.dialogBox:setSpeed( speed );
 end
 
 Scene.showDialog = function( self, text, options )
 	self.dialogBox:showText( text, options );
-
 end
 
 Scene.setBackground = function( self, imageName )
