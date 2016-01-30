@@ -6,6 +6,13 @@ local TestScene = require( "src/content/TestScene" );
 gCurrentScene = nil;
 gRenderOffset = { x = 0, y = 0 };
 gRenderScale = 1;
+gAssets = {
+	BG = {},
+	CHAR = {},
+	SOUND = {},
+	MUSIC = {},
+}
+
 
 
 -- Core functions
@@ -33,14 +40,17 @@ Letterbox = function()
 end
 
 
-
 -- Love functions
 
 love.load = function()
 	love.resize( love.graphics.getWidth(), love.graphics.getHeight() );
+	gAssets.BG.monster = love.graphics.newImage("assets/bgs/monster.jpg");
+	gAssets.SOUND.mySound = love.audio.newSource("assets/sounds/mySound.ogg");
+	gAssets.MUSIC.mySound = love.audio.newSource("assets/music/Jump.wav");
+	A = 255;
 end
 
-love.update = function()
+love.update = function( dt )
 	if not gCurrentScene then
 		local defaultScene = TestScene.new();
 		ChangeScene( defaultScene );
