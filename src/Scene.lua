@@ -34,6 +34,16 @@ end
 Scene.startThread = function( self, runtime )
 	local thread = coroutine.create( runtime );
 	table.insert( self.threads, thread );
+	return thread;
+end
+
+Scene.stopThread = function( self, thread )
+	for i = #self.threads, 1, -1 do
+		if thread == self.threads[i] then
+			table.remove( self.threads, i );
+			break;
+		end
+	end
 end
 
 Scene.wait = function( self, seconds )
@@ -48,13 +58,24 @@ Scene.wait = function( self, seconds )
 	end
 end
 
-Scene.waitForInput = function( self )
-	while IsMainInputDown() do
+Scene.waitForKeyPress = function( self, isDown )
+	while isDown() do
 		coroutine.yield();
 	end
-	while not IsMainInputDown() do
+	while not isDown() do
 		coroutine.yield();
 	end
+end
+
+Scene.waitForInput = function( self, key )
+	local isDown = function()
+		return love.keyboard.isDown( key )
+	end;
+	self:waitForKeyPress( isDown );
+end
+
+Scene.waitForMainInput = function( self )
+	self:waitForKeyPress( IsMainInputDown );
 end
 
 Scene.setDialogSpeed = function( self, speed )
