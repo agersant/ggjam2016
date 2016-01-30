@@ -11,7 +11,10 @@ end
 Scene.update = function( self )
 	for i = #self.threads, 1, -1 do
 		local thread = self.threads[i];
-		coroutine.resume( thread, self );
+		local ok, errorMessage = coroutine.resume( thread, self );
+		if not ok then
+			error( errorMessage );
+		end
 		if coroutine.status( thread ) == "dead" then
 			table.remove( self.threads, i );
 		end
