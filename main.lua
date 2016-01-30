@@ -1,5 +1,18 @@
-local Scene = require( "src/Scene" );
+local TestScene = require( "src/content/TestScene" );
 
+
+-- Globals
+
+gCurrentScene = nil;
+
+gAssets = {
+	BG = {},
+	CHAR = {},
+	SOUND = {},
+	MUSIC = {},
+}
+
+-- Core functions
 
 SetClass = function( obj, class )
 	local meta = {
@@ -8,23 +21,25 @@ SetClass = function( obj, class )
 	setmetatable( obj, meta );
 end
 
+ChangeScene = function( scene )
+	assert( scene.update );
+	assert( scene.draw );
+	gCurrentScene = scene;
+end
 
-gCurrentScene = nil;
-gAssets = {
-	BG = {},
-	CHAR = {},
-	SOUND = {},
-	MUSIC = {},
-}
+IsMainInputDown = function()
+	return love.keyboard.isDown( "space" );
+end
 
 
+-- Love functions
 
 
 love.load = function()
 	gAssets.BG.monster = love.graphics.newImage("assets/bgs/monster.jpg");
 	gAssets.SOUND.mySound = love.audio.newSource("assets/sounds/mySound.ogg");
 	gAssets.MUSIC.mySound = love.audio.newSource("assets/music/Jump.wav");
-	
+
 	A = 255;
 end
 
@@ -32,27 +47,19 @@ end
 
 love.update = function( dt )
 	if not gCurrentScene then
-		gCurrentScene = Scene.new();
+		local defaultScene = TestScene.new();
+		ChangeScene( defaultScene );
 	end
-	
-	
---	gCurrentScene.fadeOut( 5 );
-	
-	A = A - ( 255 / 5 * dt );
-	love.graphics.setColor(255, 255, 255, A)
-	
-	
-	gCurrentScene:setBackground( gAssets.BG.monster );
---	gCurrentScene:playSound( gAssets.SOUND.mySound );
---	gCurrentScene:playMusic( gAssets.MUSIC.mySound );
-	
-	
+
+
+	gCurrentScene:update();
+
 end
 
 love.draw = function()
 	if not gCurrentScene then
 		return;
-	end	
+	end
 	gCurrentScene:draw();
 end
 
