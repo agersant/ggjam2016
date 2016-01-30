@@ -17,6 +17,8 @@ SetClass = function( obj, class )
 end
 
 ChangeScene = function( scene )
+	assert( scene.update );
+	assert( scene.draw );
 	gCurrentScene = scene;
 end
 
