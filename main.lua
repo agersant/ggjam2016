@@ -34,7 +34,8 @@ end
 
 IsMainInputDown = function()
 	return 		love.keyboard.isDown( "space" )
-			or	love.keyboard.isDown( "enter" )
+			or	love.keyboard.isDown( "return" )
+			or	love.keyboard.isDown( "kpenter" )
 			or	love.keyboard.isDown( "z" );
 end
 
