@@ -3,6 +3,8 @@ local TestScene = require( "src/content/TestScene" );
 
 -- Globals
 
+refWidth = 1920;
+refHeight = 1080;
 gCurrentScene = nil;
 gRenderOffset = { x = 0, y = 0 };
 gRenderScale = 1;
@@ -67,19 +69,17 @@ love.draw = function()
 end
 
 love.resize = function( winW, winH )
-	local refW = 1920;
-	local refH = 1080;
 	local winAspectRatio = winW / winH;
-	local refAspectRatio = refW / refH;
+	local refAspectRatio = refWidth / refHeight;
 	local gameW, gameH;
 	if winAspectRatio > refAspectRatio then
 		gameH = winH;
 		gameW = gameH * refAspectRatio;
-		gRenderScale = gameH / refH;
+		gRenderScale = gameH / refHeight;
 	else
 		gameW = winW;
 		gameH = gameW / refAspectRatio;
-		gRenderScale = gameW / refW;
+		gRenderScale = gameW / refWidth;
 	end
 	assert( gameW <= winW );
 	assert( gameH <= winH );
