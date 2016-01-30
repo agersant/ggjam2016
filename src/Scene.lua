@@ -19,8 +19,15 @@ Scene.update = function( self )
 end
 
 Scene.draw = function( self )
-	if self.currentText then
-		love.graphics.print( self.currentText, 40, 20 );
+	if self.currentDialog then
+		local ox = 0;
+		local oy = 0;
+		if self.wobblyDialog then
+			local amplitude = 2.5;
+			ox = amplitude * math.random() - amplitude/2;
+			oy = amplitude * math.random() - amplitude/2;
+		end
+		love.graphics.printf( self.currentDialog, 50, 200, 700, "left", 0, 1, 1, ox, oy, 0, 0 );
 	end
 end
 
@@ -50,12 +57,18 @@ Scene.waitForInput = function( self )
 	end
 end
 
-Scene.showDialog = function( self, text )
-	self.currentText = "";
-	local textSpeed = 12;
+Scene.setDialogSpeed = function( self, speed )
+	self.dialogSpeed = speed;
+end
+
+Scene.showDialog = function( self, text, options )
+	options = options or {};
+	self.currentDialog = "";
+	self.wobblyDialog = options.wobbly;
+	local textSpeed = self.dialogSpeed or 12;
 	local startTime = love.timer.getTime();
 	local releasedInput = false;
-	while #self.currentText < #text do
+	while #self.currentDialog < #text do
 		releasedInput = releasedInput or not IsMainInputDown();
 		local now = love.timer.getTime();
 		local textSpeedScale = 1;
@@ -63,11 +76,11 @@ Scene.showDialog = function( self, text )
 		if releasedInput and IsMainInputDown() then
 			numChars = #text;
 		end
-		self.currentText = string.sub( text, 1, numChars );
+		self.currentDialog = string.sub( text, 1, numChars );
 		coroutine.yield();
 	end
 	self:waitForInput();
-	self.currentText = nil;
+	self.currentDialog = nil;
 end
 
 return Scene;
