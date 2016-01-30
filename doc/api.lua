@@ -9,7 +9,7 @@ function DateVampire( scene )
 	scene:setCharacterPose( "characterName" );
 	scene:waitForCharacterAnimation();
 	
-	scene:dialogChoice( { "a", "b" } ); -- returns a or b
+	scene:dialogChoice( { "a", callA, }, { "b", callB, } );
 	
 	
 	scene:playSound();
