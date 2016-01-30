@@ -1,8 +1,8 @@
 function DateVampire( scene )
 
 	scene:setBackground( "imageName" );
-	scene:fadeOut();
-	scene:fadeIn();
+	scene:fadeOut( duration );
+	scene:fadeIn( duration );
 	
 	scene:setCharacter( "characterName" );
 	scene:setCharacterPose( "characterName" );
