@@ -1,4 +1,5 @@
 local MessageBox = require( "src/MessageBox" );
+local ChoiceBox = require( "src/ChoiceBox" );
 
 local Scene = {}
 
@@ -8,6 +9,7 @@ Scene.new = function( runtime )
 	self.threads = {};
 	self:startThread( runtime );
 	self.dialogBox = MessageBox.new( self );
+	self.choiceBox = ChoiceBox.new( self );
 	return self;
 end
 
@@ -26,6 +28,7 @@ end
 
 Scene.draw = function( self )
 	self.dialogBox:draw();
+	self.choiceBox:draw();
 end
 
 Scene.startThread = function( self, runtime )
@@ -60,6 +63,10 @@ end
 
 Scene.showDialog = function( self, text, options )
 	self.dialogBox:showText( text, options );
+end
+
+Scene.showChoice = function( self, question, choices )
+	self.choiceBox:showChoice( question, choices );
 end
 
 Scene.setBackground = function( self, imageName )
