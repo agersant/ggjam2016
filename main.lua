@@ -20,6 +20,10 @@ ChangeScene = function( scene )
 	gCurrentScene = scene;
 end
 
+IsMainInputDown = function()
+	return love.keyboard.isDown( "space" );
+end
+
 
 
 -- Love functions

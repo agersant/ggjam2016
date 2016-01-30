@@ -19,7 +19,9 @@ Scene.update = function( self )
 end
 
 Scene.draw = function( self )
-	love.graphics.print( "Oink oink!", 40, 20 );
+	if self.currentText then
+		love.graphics.print( self.currentText, 40, 20 );
+	end
 end
 
 Scene.startThread = function( self, runtime )
@@ -39,16 +41,33 @@ Scene.wait = function( self, seconds )
 	end
 end
 
+Scene.waitForInput = function( self )
+	while IsMainInputDown() do
+		coroutine.yield();
+	end
+	while not IsMainInputDown() do
+		coroutine.yield();
+	end
+end
+
 Scene.showDialog = function( self, text )
-	-- self.currentText = "";
-	-- local textSpeed = 20;
-	-- local startTime = love.timer.getTime();
-	-- while #currentText < #text do
-		-- local now = love.timer.getTime();
-		-- local numChars = math.ceil( ( now - start ) * #currentText );
-		-- self.currentText = string.sub( text, ???? );
-		-- coroutine.yield();
-	-- end
+	self.currentText = "";
+	local textSpeed = 12;
+	local startTime = love.timer.getTime();
+	local releasedInput = false;
+	while #self.currentText < #text do
+		releasedInput = releasedInput or not IsMainInputDown();
+		local now = love.timer.getTime();
+		local textSpeedScale = 1;
+		local numChars = math.ceil( ( now - startTime ) * textSpeed * textSpeedScale );
+		if releasedInput and IsMainInputDown() then
+			numChars = #text;
+		end
+		self.currentText = string.sub( text, 1, numChars );
+		coroutine.yield();
+	end
+	self:waitForInput();
+	self.currentText = nil;
 end
 
 return Scene;

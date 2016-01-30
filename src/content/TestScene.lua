@@ -10,11 +10,9 @@ oink = function( self )
 end
 
 run = function( self )
-	self:startThread( oink );
-	while true do
-		print( "yo" );
-		self:wait( 2 );
-	end
+	-- self:startThread( oink );
+	self:showDialog( "Lorem Ipsum is simply dummy text of the printing and typesetting industry." );
+	self:showDialog( "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." );
 end
 
 TestScene.new = function()
