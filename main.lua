@@ -13,6 +13,7 @@ gAssets = {
 	CHAR = {},
 	SOUND = {},
 	MUSIC = {},
+	FONT = {},
 }
 
 
@@ -53,6 +54,8 @@ love.load = function()
 
 	gAssets.SOUND.mySound = love.audio.newSource("assets/sounds/Jump.wav");
 	gAssets.MUSIC.mySound = love.audio.newSource("assets/music/mySound.ogg");
+	
+	gAssets.FONT.dialogFont = love.graphics.newFont( "assets/font/PTS55F.ttf", 50 );
 
 end
 

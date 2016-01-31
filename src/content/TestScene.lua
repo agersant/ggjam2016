@@ -12,10 +12,10 @@ end
 run = function( self )
 	-- self:startThread( oink );
 	
-	self:setBackground( gAssets.BG.mockup );
+--	self:setBackground( gAssets.BG.mockup );
 
 	self:fadeIn( 2 );
-	self:fadeOut( 2 );
+--	self:fadeOut( 2 );
 
 	self:showChoice( "Hey, do you like tacos?", {
 		{ "Love 'em", function( scene ) print( "said love" ) end },

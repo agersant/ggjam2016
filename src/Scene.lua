@@ -32,7 +32,10 @@ end
 
 Scene.draw = function( self )
 	love.graphics.setColor( 255, 255, 255, 255 );
-	love.graphics.draw(self.currentBackground, 0, 0);
+	
+	if ( self.currentBackground ) then
+		love.graphics.draw(self.currentBackground, 0, 0);
+	end
 
 	self.portrait:draw();
 	self.dialogBox:draw();
