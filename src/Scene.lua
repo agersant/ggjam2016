@@ -2,6 +2,7 @@ local MessageBox = require( "src/MessageBox" );
 local Fading = require( "src/Fading" );
 local ChoiceBox = require( "src/ChoiceBox" );
 local Portrait = require( "src/Portrait" );
+local IntroText = require( "src/IntroText" );
 
 local Scene = {}
 
@@ -14,6 +15,7 @@ Scene.new = function( runtime )
 	self.dialogBox = MessageBox.new( self );
 	self.narrationBox = MessageBox.new( self, { showBox = false, y = 400, textAlign = "center" } );
 	self.fading = Fading.new( self );
+	self.introText = IntroText.new( self );
 	self.choiceBox = ChoiceBox.new( self );
 	self.points = 0;
 	return self;
@@ -43,6 +45,7 @@ Scene.draw = function( self )
 		love.graphics.draw( self.currentBackground, 0, 0 );
 	end
 	self.portrait:draw();
+	self.introText:draw();
 	self.narrationBox:draw();
 	self.dialogBox:draw();
 	self.choiceBox:draw();
@@ -170,6 +173,18 @@ Scene.addPoints = function( self, pointsToAdd )
 	end
 end
 
+Scene.setIntroText = function( self, text )
+	self.introText:setText( text );
+end
+
+Scene.introTextFadeIn = function( self, duration )
+	self.introText:fadeIn( duration );
+end
+
+Scene.introTextFadeOut = function( self, duration )
+	self.introText:fadeOut( duration );
+end
+
 Scene.playMusic = function( self, musicName )
 	if ( self.currentMusic and self.currentMusic ~= musicName ) then
 		love.audio.stop( self.currentMusic );
@@ -179,6 +194,11 @@ Scene.playMusic = function( self, musicName )
 	musicName:setLooping( true );
 
 	love.audio.play(self.currentMusic);
+end
+
+Scene.stopMusic = function( self, musicName )
+	self.currentMusic = nil;
+	love.audio.stop( musicName );
 end
 
 

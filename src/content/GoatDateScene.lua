@@ -85,9 +85,16 @@ end
 
 
 local run = function( self )
+
+	self:setIntroText("something something text");
+	self:introTextFadeIn( 5 );
+	self:introTextFadeOut( 5 );
+	
 	PlayNarration( self );
+	self:stopMusic(gAssets.MUSIC.narration);
 	PresentGoatDatingProfile( self );
 	TheaterDate( self );
+	
 
 	-- TODO
 	--[[scene:setBackground( gAssets.BG.mockup );

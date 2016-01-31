@@ -31,7 +31,7 @@ ChoiceBox.draw = function( self )
 
 	for i, choice in ipairs( self.choices ) do
 		if i == self.focusedChoice then
-			love.graphics.setColor( 36, 56, 97, 128 );
+			love.graphics.setColor( 36, 56, 97, 180 );
 			love.graphics.rectangle( "fill", self.x, 1080 - (40 + (98 + 18) * (#self.choices + 1 - i)) + 18, self.width, 98 );
 			
 			love.graphics.setColor( 0, 255, 252 );
@@ -44,19 +44,14 @@ ChoiceBox.draw = function( self )
 			love.graphics.rectangle( "fill", self.x, 1080 - (40 + (98 + 18) * (#self.choices + 1 - i)) + 18 + 98, self.width, thickness );
 			-- Enough with the borders
 			
-			-- Triangle   35
+			-- Triangle
 			love.graphics.polygon('fill', self.x + 6, 1080 - (40 + (98 + 18) * (#self.choices + 1 - i)) + 18 + 98 - 3, 
 										  self.x + 40, 1080 - (40 + (98 + 18) * (#self.choices + 1 - i)) + 18 + 98 - 3,
-										  self.x + 6, 1080 - (40 + (98 + 18) * (#self.choices + 1 - i)) + 18 + 98 - 37)
+										  self.x + 6, 1080 - (40 + (98 + 18) * (#self.choices + 1 - i)) + 18 + 98 - 37);
 
-			
-			
-			
-			
-			
 			love.graphics.printf( choice[1], self.x + paddingX, 1080 - (40 + (98 + 18) * (#self.choices + 1 - i)) + 18 + paddingYAnswers, self.width - 2 * paddingX, "left", 0, 1, 1, ox, oy, 0, 0 );
 		else
-			love.graphics.setColor( 0, 0, 0, 128 );
+			love.graphics.setColor( 0, 0, 0, 180 );
 			love.graphics.rectangle( "fill", self.x, 1080 - (40 + (98 + 18) * (#self.choices + 1 - i)) + 18, self.width, 98 );
 			love.graphics.setColor( 255, 255, 255, 255 );
 			
