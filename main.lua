@@ -82,6 +82,11 @@ love.load = function()
 	};
 	gAssets.CHAR.goat = {
 		exit0 = love.graphics.newImage( "assets/portraits/goat/exit0.png" );
+		sad0 = love.graphics.newImage( "assets/portraits/goat/sad.png" );
+		shocked0 = love.graphics.newImage( "assets/portraits/goat/shocked.png" );
+		mad0 = love.graphics.newImage( "assets/portraits/goat/mad.png" );
+		happy0 = love.graphics.newImage( "assets/portraits/goat/happy.png" );
+		idle0 = love.graphics.newImage( "assets/portraits/goat/idle.png" );
 	};
 
 	gAssets.SOUND.mySound = love.audio.newSource("assets/sounds/Jump.wav");

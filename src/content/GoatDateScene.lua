@@ -2,6 +2,7 @@ local PointMax = 63;
 
 local Scene = require( "src/Scene" );
 local MinnieDateScene = require( "src/content/MinnieDateScene" );
+local Goat = require( "src/content/portraits/Goat" );
 
 local GoatDateScene = {};
 
@@ -54,14 +55,14 @@ end
 
 
 local PraiseHisTitles = function( self )
-	--self:setCharacterPose( "happy" );
+	self:playCharacterAnimation( "happy" );
 	self:showDialog( "Finally! A human who knows how to treat a superior with respect.\nYou may be a worthy partner." );
 	self:addPoints( 2 );
 end
 
 
 local AskAboutHim = function( self )
-	--self:setCharacterPose( "angry" );
+	self:playCharacterAnimation( "mad" );
 	self:showDialog( "You dare ask me for more? Mortal words do not suffice to capture my splendor." );
 	self:addPoints( -2 );
 end
@@ -91,7 +92,7 @@ end
 
 
 local TellTheTruth = function( self )
-	--self:setCharacterPose( "angry" );
+	self:playCharacterAnimation( "mad" );
 	self:showDialog( "An exorcist? You believe you can exorcise me? You fool!" );
 	self:showDialog( "You are speaking with Dae'mwe S'haur!" );
 	SayTheSpiel( self );
@@ -101,9 +102,9 @@ end
 
 
 local Complimentary = function( self )
-	--self:setCharacterPose( "anger" );
+	self:playCharacterAnimation( "mad" );
 	self:showDialog( "A human should not be excited to spend time with me!\nI am the Bringer of Despair!" );
-	--self:setCharacterPose( "sad" );
+	self:playCharacterAnimation( "sad" );
 	self:wait( 1 );
 	self:showDialog( "\n\nHave I... lost my touch?" );
 	self:addPoints( -2 );
@@ -111,32 +112,32 @@ end
 
 
 local Dread = function( self )
-	--self:setCharacterPose( "sad" );
+	self:playCharacterAnimation( "sad" );
 	self:showDialog( "You have... dreaded this date?" );
 	self:wait( 1 );
-	--self:setCharacterPose( "happy" );
+	self:playCharacterAnimation( "happy" );
 	self:showDialog( "Marvelous! I suppose my immense reputation precedes me." );
 	self:addPoints( 2 );
 end
 
 
 local BuyTheManFood = function( self )
-	--self:playCharacterAnimation( "shock" )
+	self:playCharacterAnimation( "shocked" );
 	self.noMoMoney = true;
 	self:showDialog( "By the wing's of Abaddon. You must possess a fortune!", { wobbly = true } );
 	self:addPoints( 2 );
-	--self:playCharacterAnimation( "happy" )
+	self:playCharacterAnimation( "happy" );
 end
 
 
 local TheWiseChoice = function( self )
-	--self:playCharacterAnimation( "idle" )
+	self:playCharacterAnimation( "idle" );
 	self:showDialog( "You are very wise. Save your money for dinner." );
 end
 
 
 local FrontRow = function( self )
-	--self:playCharacterAnimation( "happy" );
+	self:playCharacterAnimation( "happy" );
 	self:addPoints( 4 );
 	self:showDialog( "The front row is perfect. Many mortals will not be able to see over my head.\nI may even obscure a portion of the screen." );
 	self:showDialog( "< He's laughing heartily >" );
@@ -144,26 +145,23 @@ end
 
 
 local MiddleRow = function( self )
-	--self:playCharacterAnimation( "happy" );
+	self:playCharacterAnimation( "happy" );
 	self:showDialog( "In the middle row we will have a good view of the film, and I can block the vision of half the theater.\n\nWonderful." );
 	self:addPoints( 2 );
 end
 
 
 local BackRow = function( self )
-	--self:playCharacterAnimation( "idle" );
+	self:playCharacterAnimation( "idle" );
 	self:showDialog( "I suppose that is alright." );
 end
 
 
 local TheaterDate = function( self )
 	self:setBackground( gAssets.BG.theater );
-	self:fadeIn( 3 );
 	--self:playMusic( gAssets.MUSIC.theaterLobby );
-	--self:setCharacter( "goat" );
-	--self:setCharacterPose( "entrance" );
-	--self:wait( 2 );
-	--self:setCharacterPose( "idle" );
+	self:playCharacterAnimation( "idle" );
+	self:fadeIn( 3 );
 	self:setIntroText( "King of the Seventh Circle of Hell: Dae’mwe S’haur" );
 	self:introTextFadeIn( 5 );
 	self:introTextFadeOut( 5 );
@@ -218,37 +216,37 @@ end
 
 
 local BowlBlood = function( self )
-	--self:playCharacterAnimation( "shock" );
+	self:playCharacterAnimation( "shocked" );
 	self:showDialog( "That...", { wobbly = true } );
 	self:showDialog( "is...", { wobbly = true } );
-	--self:playCharacterAnimation( "happy" );
+	self:playCharacterAnimation( "happy" );
 	self:addPoints( 4 );
 	self:showDialog( "Sheer brilliance! Blood draining and bathing? That idea has a little something for everyone." );
 end
 
 
 local IronMaiden = function( self )
-	--self:playCharacterAnimation( "idle" );
+	self:playCharacterAnimation( "idle" );
 	self:showDialog( "It is good the children would be suffering, but I like to consume pain with both my eyes and my ears." );
 end
 
 
 local AllTheMeat = function( self )
-	--self:playCharacterAnimation( "happy" );
+	self:playCharacterAnimation( "happy" );
 	self:addPoints( 4 );
 	self:showDialog( "I was wrong to doubt you. I hope many animals are slaughtered to bring me this meal." );
 end
 
 
 local NewYorksFinest = function( self )
-	--self:playCharacterAnimation( "happy" );
+	self:playCharacterAnimation( "happy" );
 	self:addPoints( 1 );
 	self:showDialog( "A fine choice." );
 end
 
 
 local NotMakingFriends = function( self )
-	--self:playCharacterAnimation( "angry" );
+	self:playCharacterAnimation( "mad" );
 	self:addPoints( -4 );
 	self:showDialog( "YOU WOULD ORDER THE KING OF THE SEVENTH CIRCLE OF HELL TREE LEAVES?", { wobbly = true } );
 	self:wait( 2 );
@@ -259,7 +257,7 @@ end
 
 
 local StealOrder = function( self )
-	--self:playCharacterAnimation( "shock" );
+	self:playCharacterAnimation( "shocked" );
 	self:showDialog( "You dare?", { wobbly = true } );
 	self:addPoints( -1 );
 	self:showChoice( "< He does not look happy >", { { "He'll take the turf and turf and turf and turf.", AllTheMeat },
@@ -269,24 +267,22 @@ end
 
 
 local TakeTime = function ( self )
-	--self:playCharacterAnimation( "idle" );
+	self:playCharacterAnimation( "idle" );
 	self:showDialog( "< THEN ARRIVES WAITER >" );
 	self:showDialog( "I'll have the \"All you Can Meat special.\" with a side of meat." );
 end
 
 
 local SteakingAClaim = function( self )
-	--self:playCharacterAnimation( "happy" )
+	self:playCharacterAnimation( "happy" );
 	self:showDialog( "Yes, best to eat something which was once living. \nFilled with blood, organs and sinew. My mouth is watering just thinking about it." );
 	self:addPoints( 2 );
 end
 
 
 local SalAdd = function( self )
-	--self:playCharacterAnimation( "angry" )
+	self:playCharacterAnimation( "mad" );
 	self:showDialog( "I did not realize I was out with a-" );
-	--self:playCharacterAnimation( "shakeydoo" );
-	--self:waitForCharacterAnimation();
 	self:showDialog( "-vegetarian." );
 	self:addPoints( -2 );
 end
@@ -295,16 +291,16 @@ end
 local GottaGoFilm = function( self )
 	self:addPoints( 2 );
 	self:showDialog( "Yes, film is the only way to go." );
-	--self:playCharacterAnimation( "angry" );
+	self:playCharacterAnimation( "mad" );
 	self:wait( 1 );
 	self:showDialog( "The only way.", { wobbly = true } );
 end
 
 
 local TheDigitalFuture = function( self )
-	--self:playCharacterAnimation( "idle" );
+	self:playCharacterAnimation( "idle" );
 	self:showDialog( "Do you not think photos lose their authenticity on digital?" );
-	--self:playCharacterAnimation( "sad" );
+	self:playCharacterAnimation( "sad" );
 	self:showDialog( "The future is grim for photography." );
 	self:addPoints( -2 );
 end
@@ -319,7 +315,7 @@ end
 
 
 local ProfilePicDistraction = function( self )
-	--self:playCharacterAnimation( "happy" );
+	self:playCharacterAnimation( "happy" );
 	self:addPoints( 4 );
 	self:showDialog( "Thank you! I took that picture myself!" );
 	FilmTime( self );
@@ -327,14 +323,14 @@ end
 
 
 local HobbyMaybe = function( self )
-	--self:playCharacterAnimation( "happy" );
+	self:playCharacterAnimation( "happy" );
 	self:showDialog( "I have a passion for photography." );
 	FilmTime( self );
 end
 
 
 local DevilSpiel = function( self )
-	--self:playCharacterAnimation( "happy" );
+	self:playCharacterAnimation( "happy" );
 	self:showDialog( "You've heard of him, yes?" );
 	self:setDialogSpeed( 16 );
 	self:showDialog( "He is Lucifer.", { ignoreInput = true }  );
@@ -359,7 +355,7 @@ end
 
 
 local CloseFather = function( self )
-	--self:playCharacterAnimation( "shock" );
+	self:playCharacterAnimation( "shocked" );
 	self:addPoints( 4 );
 	self:showDialog( "You must tell me how I can achieve something similar with the allfather!" );
 	DevilSpiel( self );
@@ -367,7 +363,7 @@ end
 
 
 local LikeDad = function( self )
-	--self:playCharacterAnimation( "idle" );
+	self:playCharacterAnimation( "idle" );
 	self:addPoints( 1 );
 	self:showDialog( "I wish I could get along well with the allfather." );
 	DevilSpiel( self );
@@ -375,7 +371,7 @@ end
 
 
 local NoDadPlease = function( self )
-	--self:playCharacterAnimation( "angry" );
+	self:playCharacterAnimation( "mad" );
 	self:addPoints( -2 );
 	self:showDialog( "You squander your potential!" );
 	self:showDialog( "Mortals are easy to get along with. I must attempt to create a relationship with the allfather!" );
@@ -384,7 +380,7 @@ end
 
 
 local GoodEnough = function( self )
-	--self:playCharacterAnimation( "idle" );
+	self:playCharacterAnimation( "idle" );
 	self:addPoints( 1 );
 	self:showDialog( "I thank you for your kind words, but I do not need to be patronized. I am the King of the Seventh Circle of Hell." );
 end
@@ -392,13 +388,13 @@ end
 
 local HappyAndSafe = function( self )
 	self:wait( 2 );
-	--self:playCharacterAnimation( "idle" );
+	self:playCharacterAnimation( "idle" );
 	self:wait( 0.5 );
-	--self:playCharacterAnimation( "sad" );
+	self:playCharacterAnimation( "sad" );
 	self:wait( 0.5 );
-	--self:playCharacterAnimation( "idle" );
+	self:playCharacterAnimation( "idle" );
 	self:wait( 0.5 );
-	--self:playCharacterAnimation( "sad" );
+	self:playCharacterAnimation( "sad" );
 	self:wait( 0.5 );
 	
 	self:showDialog( "\n\nHappy and safe?", { wobbly = true } );
@@ -409,21 +405,21 @@ end
 
 
 local Compromise = function( self )
-	--self:playCharacterAnimation( "idle" );
+	self:playCharacterAnimation( "idle" );
 	self:showDialog( "You might be right. Thank you for listening to an old goat rant." );
 end
 
 
 local EvilLaugh = function( self, pointsToAdd )
 	self:wait( 2 );
-	--self:playCharacterAnimation( "idle" );
+	self:playCharacterAnimation( "idle" );
 	self:wait( 0.5 );
 	self:addPoints( pointsToAdd );
-	--self:playCharacterAnimation( "happy" );
+	self:playCharacterAnimation( "happy" );
 	self:wait( 0.5 );
-	--self:playCharacterAnimation( "idle" );
+	self:playCharacterAnimation( "idle" );
 	self:wait( 0.5 );
-	--self:playCharacterAnimation( "happy" );
+	self:playCharacterAnimation( "happy" );
 	self:wait( 0.5 );
 
 	self:setDialogSpeed( 8 );
@@ -444,7 +440,7 @@ local YouTortureMe = function( self )
 	EvilLaugh( self, 4 );
 	self:showDialog( "Then I am the truest demon! To ellicit such a reaction from you is a great honor." );
 	self:showDialog( "If I can make you feel that way, then I can surely make Lucifer notice me instead of cousin Cha'zir!" );
-	--self:playCharacterAnimation( "angry" );
+	self:playCharacterAnimation( "mad" );
 	self:showDialog( "He has always liked Cha'zir better." );
 	self:showChoice( "< He's seething >", { { "Surely there's room in the heart of a god for more than one demon.", Compromise },
 		{ "Okay, here's the plan. Let's murder your cousin, dump the body and you can slip into his position at Lucifer's side.", BestLaidPlans } } );
@@ -452,21 +448,21 @@ end
 
 
 local BookIt = function( self )
-	--self:playCharacterAnimation( "happy" );
+	self:playCharacterAnimation( "happy" );
 	self:addPoints( 1 );
 	self:showDialog( "That is just what I was thinking. Let's explode this stand of popsicles." );
 end
 
 
 local IWillPay = function( self )
-	--self:playCharacterAnimation( "happy" );
+	self:playCharacterAnimation( "happy" );
 	self:addPoints( 6 );
 	self:showDialog( "I see money is not a problem for you. Very interesting." );
 end
 
 
 local LetHimPay = function( self )
-	--self:playCharacterAnimation( "angry" );
+	self:playCharacterAnimation( "mad" );
 	self:addPoints( -2 );
 	self:showDialog( "Your weakness disappoints me. I will pay your bill if I must." );
 	self:showDialog( "< Dae will remember that >" );
@@ -474,32 +470,33 @@ end
 
 
 local DinnerDate = function( self )
+	self:playCharacterAnimation( "idle" );
 	self:setBackground( gAssets.BG.dinner );
 	self:fadeIn( 3 );
 
 	if self.movieAnswer == 0 then
-		--self:playCharacterAnimation( "angry" );
+		self:playCharacterAnimation( "mad" );
 		self:showDialog( "Angels! Why did it have to be angels! I can not stand angels." );
 		self:showDialog( "Their gross little wings." );
 		self:showDialog( "Their sickening holly jolly attitude." );
 		self:showDialog( "Those horrible smiles.", { wobbly = true } );
 		self:wait( 1.5 );
-		--self:playCharacterAnimation( "sad" );
+		self:playCharacterAnimation( "sad" );
 		self:showDialog( "\n\nThey haunt my dreams..." );
 		self:addPoints( -4 );
 	elseif self.movieAnswer == 1 then
-		--self:playCharacterAnimation( "happy" );
+		self:playCharacterAnimation( "happy" );
 		self:addPoints( 4 );
 		self:showDialog( "I LOVE DOGS!", { wobbly = true } );
 		self:showDialog( "It may not be fashionable for a demon to say that." );
 		self:wait( 1 );
 		self:showDialog( "\nBUT THEY'RE SO FLUFFY!", { wobbly = true } );
 	else
-		--self:playCharacterAnimation( "shock" );
+		self:playCharacterAnimation( "shocked" );
 		self:showDialog( "I thought the title was in jest!" );
 		self:showDialog( "An entire movie about laughing children, and not one was in pain!" );
 		self:addPoints( -2 );
-		--self:playCharacterAnimation( "idle" );
+		self:playCharacterAnimation( "idle" );
 		self:showDialog( "How would you correct the mistakes of those filmmaking fools?" );
 		self:showChoice( "< He's deep in thought >", { { "Slowly lower the children into a pit of lava.", LavaPit },
 			{ "Drain the blood of the children into a bowl, then bathe in it.", BowlBlood },
@@ -517,14 +514,14 @@ local DinnerDate = function( self )
 	self:showChoice( "< He's lost in thought >", { { "Do you have any non-torture hobbies?", HobbyMaybe },
 		{ "You know, your look fantastic in your profile picture.", ProfilePicDistraction } } );
 
-	--self:playCharacterAnimation( "idle" );
+	self:playCharacterAnimation( "idle" );
 	self:showDialog( "We speak too much of Dae. I must hear more of you." );
 	self:showDialog( "Do you have a good relationship with your father?" );
 	self:showChoice( "< He's looking at you, but also not?", { { "My father and I are extremely close. He's actually waiting in my car right now.", CloseFather }, 
 		{ "I like my dad. He's a pretty cool guy.", LikeDad },
 		{ "I could take him or leave him.", NoDadPlease } } );
 
-	--self:playCharacterAnimation( "sad" );
+	self:playCharacterAnimation( "sad" );
 	self:showDialog( "How can I possibly be a good enough demon for Beelzebub himself?" );
 	self:setDialogSpeed( 12 );
 	self:showDialog( "\nDo you think I'm good enough?", { wobbly = true } );
@@ -554,11 +551,11 @@ end
 
 local ArmAround = function( self )
 	if self:getPoints() >= 35 then
-		--self:playAnimation( "happy" );
+		self:playCharacterAnimation( "happy" );
 		self:addPoints( 4 );
 		self:showDialog( "< He bristles slightly at your touch. His body feels warm under your arm >" );
 	else
-		--self:playAnimation( "angry" );
+		self:playCharacterAnimation( "mad" );
 		self:addPoints( -2 );
 		self:showDialog( "What are you doing mortal? Do you truly think this date is going well enough for intimate contact?" );
 	end
@@ -567,11 +564,11 @@ end
 
 local Handsies = function( self )
 	if self:getPoints() >= 25 then
-		--self:playAnimation( "happy" );
+		self:playCharacterAnimation( "happy" );
 		self:addPoints( 2 );
 		self:showDialog( "< He gladly takes your hand and swings it up and down. He seems like he's having a good time. >" );
 	else
-		--self:playAnimation( "angry" );
+		self:playCharacterAnimation( "mad" );
 		self:addPoints( -2 );
 		self:showDialog( "Augh! Get off of me disgusting human." );
 	end
@@ -579,7 +576,7 @@ end
 
 
 local ThatIsLame = function( self )
-		--self:playAnimation( "idle" );
+	self:playCharacterAnimation( "idle" );
 	self:addPoints( -2 );
 	self:showDialog( "< You walk side by side to his car >" );
 end
@@ -590,14 +587,14 @@ local LetsContinue = function( self )
 		EvilLaugh( self, 8 );
 		self:showDialog( "You can turn off the charm, exorcist. Your job is nearly finished." );
 	else
-		--self:playAnimation( "Angry" );
+		self:playCharacterAnimation( "mad" );
 		self:showDialog( "You presume too much human! A demon lord would never bed a mortal." );
 	end
 end
 
 
 local TheSpiel = function( self )
-	--self:playAnimation( "Happy" );
+	self:playCharacterAnimation( "happy" );
 	self:addPoints( 4 );
 	self:showDialog( "Thank you too, human. I feel I have learned much of mortal ways this night." );
 	self:showDialog( "And much of myself." );
@@ -605,10 +602,10 @@ end
 
 
 local KissyKissy = function( self )
-	--self:playAnimation( "Shock" );
+	self:playCharacterAnimation( "shocked" );
 	self:showDialog( "What are you doing?", { wobbly = true } );
 	self:wait( 2 );
-	--self:playAnimation( "angry" );
+	self:playCharacterAnimation( "mad" );
 	self:showDialog( "Stop that at once!" );
 	self:addPoints( -2 );
 end
@@ -616,31 +613,31 @@ end
 
 local PlayTransformation = function ( self )
 	self:playMusic( gAssets.MUSIC.narration );
-	--self:playAnimation( idle );
+	self:playCharacterAnimation( "idle" );
 	self:wait( 2 );
-	--self:playAnimation( happy );
+	self:playCharacterAnimation( "happy" );
 	self:wait( 1.5 ); 
-	--self:playAnimation( idle );
+	self:playCharacterAnimation( "idle" );
 	self:wait( 1.3 );
-	--self:playAnimation( happy );
+	self:playCharacterAnimation( "happy" );
 	self:wait( 1 ); 
-	--self:playAnimation( idle );
+	self:playCharacterAnimation( "idle" );
 	self:wait( 0.8 );
-	--self:playAnimation( happy );
+	self:playCharacterAnimation( "happy" );
 	self:wait( 0.5 ); 
-	--self:playAnimation( idle );
+	self:playCharacterAnimation( "idle" );
 	self:wait( 0.3 );
-	--self:playAnimation( happy );
+	self:playCharacterAnimation( "happy" );
 	self:wait( 0.2 ); 
-	--self:playAnimation( idle );
+	self:playCharacterAnimation( "idle" );
 	self:wait( 0.1 );
-	--self:playAnimation( happy );
+	self:playCharacterAnimation( "happy" );
 	self:wait( 0.05 ); 
-	--self:playAnimation( "idle" );
+	self:playCharacterAnimation( "idle" );
 	self:wait( 0.02 );
-	--self:playAnimation( "happy" );
+	self:playCharacterAnimation( "happy" );
 	self:wait( 0.01 ); 
-	--self:playAnimation( "transform" );
+	self:playCharacterAnimation( "exit" );
 	self:fadeOut( 8 );
 
 	self:playNarration( "WELL DONE EXORCIST!" );
@@ -651,11 +648,15 @@ local PlayTransformation = function ( self )
 	self:playNarration( "WHAT DO YOU WANT FROM ME, I'M A DISEMBODIED VOICE" );
 	self:setDialogSpeed( 6 );
 	self:playNarration( "JERK", { wobbly = true } );
+	self:showReport( true, math.floor( ( ( self:getPoints() / PointMax ) * 100 ) / 100 ) );
+	self:waitForMainInput();
+	ChangeScene( MinnieDateScene.new() );
 end
 
 
 local ParkingLotDate = function( self )
 	self:playMusic( gAssets.MUSIC.parkingLot );
+	self:playCharacterAnimation( "idle" );
 	self:setBackground( gAssets.BG.parking );
 	self:fadeIn( 3 );
 	self:showDialog( "Come, walk to my vehicle." );	
@@ -664,19 +665,19 @@ local ParkingLotDate = function( self )
 		{ "Walk separately.", ThatIsLame } } );
 	self:wait( 2 );
 	if self:getPoints() >= 35 then
-		--self:playAnimation( "idle" );
+		self:playCharacterAnimation( "idle" );
 		self:showDialog( "Human, spending time with you has been..." );
 		self:showDialog( "Torturous", { wobbly = true } );
 		self:showDialog( "Horribly painful", { wobbly = true } );
 		self:wait( 1 );
-		--self:playAnimation( "happy" );
+		self:playCharacterAnimation( "happy" );
 		self:showDialog( "...and maybe even a little bit fun." );
 	elseif self:getPoints() >= 15 then
-		--self:playAnimation( "idle" );
+		self:playCharacterAnimation( "idle" );
 		self:showDialog( "Human, this date has been moderately bearable." );
 		self:showDialog( "I was expecting boredom." );
 	else
-		--self:playAnimation( "idle" );
+		self:playCharacterAnimation( "idle" );
 		self:showDialog( "Human, I think we should get this business over with." );
 	end
 	self:showDialog( "< He's looking at you, as if he's expecting something >" );
@@ -733,21 +734,21 @@ local KillFunction = function( self )
 	self:setDialogSpeed();
 	self:showNarration( "ANYWAYS..." );
 	self:showNarration( "I HOPE IT GOES BETTER NEXT TIME" );
+	self:showReport( true, math.floor( ( ( self:getPoints() / PointMax ) * 100 ) / 100 ) )
+	self:waitForMainInput();
 	ChangeScene( MinnieDateScene.new() );
 end
 
 
 local run = function( self )
 	self.kill = KillFunction;
---	PlayNarration( self );
---	self:stopMusic( gAssets.MUSIC.narration );
---	PresentGoatDatingProfile( self );
---	TheaterDate( self );
---	DinnerDate( self );
---	ParkingLotDate( self );	
-
-	self:showReport( true, 0.65 );
-
+	self:setCharacter( Goat );
+	PlayNarration( self );
+	self:stopMusic( gAssets.MUSIC.narration );
+	PresentGoatDatingProfile( self );
+	TheaterDate( self );
+	DinnerDate( self );
+	ParkingLotDate( self );
 end
 
 
