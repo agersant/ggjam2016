@@ -4,17 +4,26 @@ Portrait.new = function( scene )
 	local self = {};
 	SetClass( self, Portrait );
 	self.scene = scene;
+	self:reset();
 	return self;
 end
 
 Portrait.reset = function( self )
 	self.image = nil;
+	self.wobbleAmount = 0;
 end
 
 Portrait.draw = function( self )
 	if self.image then
+		love.graphics.push();
+		if self.wobbleAmount > 0 then
+			local xAmount = self.wobbleAmount * math.random() - self.wobbleAmount / 2;
+			local yAmount = self.wobbleAmount * math.random() - self.wobbleAmount / 2;
+			love.graphics.translate( xAmount, yAmount );
+		end
 		love.graphics.setColor( 255, 255, 255, 255 );
 		love.graphics.draw( self.image );
+		love.graphics.pop();
 	end
 end
 
@@ -31,6 +40,7 @@ Portrait.playAnimation = function( self, animationName )
 	if self.currentAnimation then
 		self.scene:stopThread( self.currentAnimation );
 	end
+	self:reset();
 	local animate = function()
 		self.character:playAnimation( animationName );
 	end;
@@ -54,5 +64,8 @@ Portrait.setImage = function( self, image )
 	self.image = image;
 end
 
+Portrait.setWobble = function( self, amplitude )
+	self.wobbleAmount = amplitude;
+end
 
 return Portrait;

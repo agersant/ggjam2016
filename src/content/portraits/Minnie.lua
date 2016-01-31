@@ -27,6 +27,7 @@ Minnie.playAnimation = function( self, animationName )
 end
 
 Minnie.playAngry = function( self )
+	self.portrait:setWobble( 15 );
 	self.portrait:setImage( gAssets.CHAR.minnie.angry0 );
 end
 
