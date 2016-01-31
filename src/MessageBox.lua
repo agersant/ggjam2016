@@ -2,54 +2,63 @@ local Gradient = require( "src/Gradient" );
 
 local MessageBox = {};
 
-MessageBox.new = function( scene )
+MessageBox.new = function( scene, options )
+	options = options or {};
 	local self = {};
 	SetClass( self, MessageBox );
 	self.scene = scene;
-	self.gradient = Gradient.new( self );
 	
-	self.rainbow = self.gradient.gradient {
-    direction = 'horizontal';
-    {0, 100, 176, 200};
-    {0, 100, 176, 0};
-}
+	self.width = 1600;
+	self.height = 330;
+	self.x = options.x or ( 1920 - self.width ) / 2;
+	self.y = options.y or 1080 - 40 - self.height;
+	self.showBox = options.showBox ~= false;
+	self.textAlign = options.textAlign or "left";
 	
-	
-
-	
-	
+	self.boxGradient = Gradient.new( self ).gradient( {
+		direction = 'horizontal',
+		{ 0, 100, 176, 200 },
+		{ 0, 100, 176, 0 },
+	} );
 	return self;
 end
 
 MessageBox.draw = function( self )
-
-	love.graphics.setColor(115, 189, 143, 102);
-	love.graphics.rectangle( "fill", (1920-1600)/2, 1080-40-330, 1600, 330 );
-	love.graphics.setColor(255, 255, 255, 255);
-	Gradient.drawinrect(self.rainbow, (1920-1600)/2, 1080-40-330, 1600, 330);
 	
-	-- Borders
-	love.graphics.setColor(255, 255, 255, 255);
-	love.graphics.rectangle( "fill", (1920-1600)/2, 1080-40-330, 3, 330 );
-	love.graphics.rectangle( "fill", (1920-1600)/2 + 1600, 1080-40-330, 3, 330 );
-	love.graphics.rectangle( "fill", (1920-1600)/2, 1080-40-330, 1600, 3 );
-	love.graphics.rectangle( "fill", (1920-1600)/2, 1080-40-3, 1600, 3 );
-	-- Enough with the borders
-
-	if self.currentText then
-		local ox = 0;
-		local oy = 0;
-		if self.wobbly then
-			local amplitude = 2.5;
-			ox = amplitude * math.random() - amplitude/2;
-			oy = amplitude * math.random() - amplitude/2;
-		end
-
-		love.graphics.setColor(255, 255, 255, 255);
-		love.graphics.setFont( gAssets.FONT.dialogFont );
-
-		love.graphics.printf( self.currentText, (1920-1600)/2 + 50, 1080-40-330+20, 1600-100, "left", 0, 1, 1, ox, oy, 0, 0 );
+	if not self.currentText then
+		return;
 	end
+
+	if self.showBox then
+		love.graphics.setColor( 115, 189, 143, 102 );
+		love.graphics.rectangle( "fill", self.x, self.y, self.width, self.height );
+		love.graphics.setColor( 255, 255, 255, 255 );
+		Gradient.drawinrect( self.boxGradient, self.x, self.y, self.width, self.height );
+		
+		-- Borders
+		local thickness = 3;
+		love.graphics.setColor( 255, 255, 255, 255 );
+		love.graphics.rectangle( "fill", self.x, self.y, thickness, self.height );
+		love.graphics.rectangle( "fill", self.x + self.width - thickness, self.y, thickness, self.height );
+		love.graphics.rectangle( "fill", self.x, self.y, self.width, thickness );
+		love.graphics.rectangle( "fill", self.x, self.y + self.height - thickness, self.width, thickness );
+		-- Enough with the borders
+	end
+	
+	local ox = 0;
+	local oy = 0;
+	if self.wobbly then
+		local amplitude = 2.5;
+		ox = amplitude * math.random() - amplitude/2;
+		oy = amplitude * math.random() - amplitude/2;
+	end
+
+	love.graphics.setColor( 255, 255, 255, 255 );
+	love.graphics.setFont( gAssets.FONT.dialogFont );
+
+	local paddingX = 50;
+	local paddingY = 20;
+	love.graphics.printf( self.currentText, self.x + paddingX, self.y + paddingY, self.width - 2 * paddingX, self.textAlign, 0, 1, 1, ox, oy, 0, 0 );
 end
 
 MessageBox.showText = function( self, text, options )

@@ -17,6 +17,8 @@ run = function( self )
 
 --	self:fadeIn( 2 );
 --	self:fadeOut( 2 );
+	
+	self:showNarration( "I love tacos and demons, who doesnt love tacos or demons?" );
 
 	self:setBackground( gAssets.BG.mockup );
 	self:setCharacter( Minnie );

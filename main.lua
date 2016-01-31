@@ -72,7 +72,7 @@ end
 
 love.update = function( dt )
 	if not gCurrentScene then
-		local defaultScene = GoatDateScene.new();
+		local defaultScene = TestScene.new();
 		ChangeScene( defaultScene );
 	end
 	gCurrentScene:update();

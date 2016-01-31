@@ -12,6 +12,7 @@ Scene.new = function( runtime )
 	self:startThread( runtime );
 	self.portrait = Portrait.new( self );
 	self.dialogBox = MessageBox.new( self );
+	self.narrationBox = MessageBox.new( self, { showBox = false, y = 400, textAlign = "center" } );
 	self.fading = Fading.new( self );
 	self.choiceBox = ChoiceBox.new( self );
 	return self;
@@ -32,13 +33,11 @@ end
 
 Scene.draw = function( self )
 	love.graphics.setColor( 255, 255, 255, 255 );
-
-
-	if ( self.currentBackground ) then
-		love.graphics.draw(self.currentBackground, 0, 0);
+	if self.currentBackground then
+		love.graphics.draw( self.currentBackground, 0, 0 );
 	end
-
 	self.portrait:draw();
+	self.narrationBox:draw();
 	self.dialogBox:draw();
 	self.choiceBox:draw();
 	self.fading:draw();
@@ -106,6 +105,10 @@ end
 
 Scene.showDialog = function( self, text, options )
 	self.dialogBox:showText( text, options );
+end
+
+Scene.showNarration = function( self, text, options )
+	self.narrationBox:showText( text, options );
 end
 
 Scene.showChoice = function( self, question, choices )
