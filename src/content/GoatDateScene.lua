@@ -97,7 +97,7 @@ end
 
 
 local Dread = function( self )
-	--self:setCharacterPose( "shock" );
+	--self:setCharacterPose( "sad" );
 	self:showDialog( "You have... dreaded this date?" );
 	self:wait( 1 );
 	--self:setCharacterPose( "happy" );
@@ -168,7 +168,7 @@ local TheaterDate = function( self )
 
 	self:showDialog( "So....." );
 	self:showDialog( "The picture selection is quite varied. I haven't been to a multiplex since I was a kid." );
-	self:showDialog( "My nanny used to take me to see horror films. I've never laughed so hard in my life." );
+	self:showDialog( "My nanny used to take me to see horror films.\nWe would laugh and laugh until they kicked us out." );
 	self:showDialog( "What show should we see?" );
 
 	local SetMovieAnswer = function( movieAnswer )
@@ -196,11 +196,184 @@ local TheaterDate = function( self )
 end
 
 
+local LavaPit = function( self )
+	self:showDialog( "Good idea. If the children are slowly lowered into lava there is time to hear them scream." );
+	self:addPoints( 2 );
+end
+
+
+local BowlBlood = function( self )
+	--self:playCharacterAnimation( "shock" );
+	self:showDialog( "That...", { wobbly = true } );
+	self:showDialog( "is...", { wobbly = true } );
+	--self:playCharacterAnimation( "happy" );
+	self:addPoints( 4 );
+	self:showDialog( "Sheer brilliance! Blood draining and bathing? That idea has a little something for everyone." );
+end
+
+
+local IronMaiden = function( self )
+	--self:playCharacterAnimation( "idle" );
+	self:showDialog( "It is good the children would be suffering, but I like to consume pain with both my eyes and my ears." );
+end
+
+
+local AllTheMeat = function( self )
+	--self:playCharacterAnimation( "happy" );
+	self:addPoints( 4 );
+	self:showDialog( "I was wrong to doubt you. I hope many animals are slaughtered to bring me this meal." );
+end
+
+
+local NewYorksFinest = function( self )
+	--self:playCharacterAnimation( "happy" );
+	self:addPoints( 1 );
+	self:showDialog( "A fine choice." );
+end
+
+
+local NotMakingFriends = function( self )
+	--self:playCharacterAnimation( "angry" );
+	self:addPoints( -4 );
+	self:showDialog( "YOU WOULD ORDER THE KING OF THE SEVENTH CIRCLE OF HELL TREE LEAVES????", { wobbly = true } );
+	self:wait( 2 );
+	self:showDialog( "I am S'haur!" );
+	SayTheSpiel( self );
+end
+
+
+local StealOrder = function( self )
+	--self:playCharacterAnimation( "shock" );
+	self:showDialog( "You dare?", { wobbly = true } );
+	self:addPoints( -1 );
+	self:showChoice( "< He does not look happy >", { { "He'll take the turf and turf and turf and turf.", AllTheMeat },
+		{ "He's in the mood for some pastrami.", NewYorksFinest },
+		{ "This man is a salad man. Give him something as green as possible.", NotMakingFriends } } );
+end
+
+
+local TakeTime = function ( self )
+	--self:playCharacterAnimation( "idle" );
+	self:showDialog( "< THEN ARRIVES WAITER >" );
+	self:showDialog( "I will have the \"All you Can Meat special.\" with a side of meat." );
+end
+
+
+local SteakingAClaim = function( self )
+	--self:playCharacterAnimation( "happy" )
+	self:showDialog( "I was worried for a second that you would make the incorrect choice." );
+	self:addPoints( 2 );
+end
+
+
+local SalAdd = function( self )
+	--self:playCharacterAnimation( "angry" )
+	self:showDialog( "I did not realize I was out with a-" );
+	--self:playCharacterAnimation( "shakeydoo" );
+	--self:waitForCharacterAnimation();
+	self:showDialog( "-vegetarian." );
+	self:addPoints( -2 );
+end
+
+
+local GottaGoFilm = function( self )
+	self:addPoints( 2 );
+	self:showDialog( "Yes, film is the only way to go." );
+	--self:playCharacterAnimation( "angry" );
+	self:wait( 1 );
+	self:showDialog( "The only way.", { wobbly = true } );
+end
+
+
+local TheDigitalFuture = function( self )
+	--self:playCharacterAnimation( "idle" );
+	self:showDialog( "Do you not think photos lose their authenticity on digital?" );
+	--self:playCharacterAnimation( "sad" );
+	self:showDialog( "The future is grim for photography" );
+	self:addPoints( -2 );
+end
+
+
+local FilmTime = function( self )
+	self:showDialog( "I like to enfuse my shots with an aesthetically pleasing grain. The grain adds an extra dimension to a photo. It brings out a certain charm and personality which is otherwise lacking." );
+	self:showDialog( "It is also very important to shoot in natural light. All the fake Hollywood trickery you see nowadays just ruins the purity of a shot." );
+	self:showChoice( "Do you have a favorite medium for picture taking?", { { "I prefer film.", GottaGoFilm },
+		{ "Digitize me, baby.", TheDigitalFuture } } );
+end
+
+
+local ProfilePicDistraction = function( self )
+	--self:playCharacterAnimation( "happy" );
+	self:addPoints( 4 );
+	self:showDialog( "Thank you! I took that picture myself!" );
+	FilmTime( self );
+end
+
+
+local HobbyMaybe = function( self )
+	--self:playCharacterAnimation( "happy" );
+	self:showDialog( "I have a passion for photography." );
+	FilmTime( self );
+end
+
+
+local DinnerDate = function( self )
+	self:setBackground( gAssets.BG.dinner );
+
+	if self.movieAnswer == 0 then
+		--self:playCharacterAnimation( "angry" );
+		self:showDialog( "Angels! Why did it have to be angels! I can not stand angels." );
+		self:showDialog( "Their gross little wings." );
+		self:showDialog( "Their sickening holly jolly attitude." );
+		self:showDialog( "Those horrible smiles.", { wobbly = true } );
+		self:wait( 1.5 );
+		--self:playCharacterAnimation( "sad" );
+		self:showDialog( "\n\nThey haunt my dreams..." );
+		self:addPoints( -4 );
+	elseif self.movieAnswer == 1 then
+		--self:playCharacterAnimation( "happy" );
+		self:addPoints( 4 );
+		self:showDialog( "I LOVE DOGS!", { wobbly = true } );
+		self:showDialog( "It may not be fashionable for a demon to say that." );
+		self:wait( 1 );
+		self:showDialog( "\nBUT THEY'RE SO FLUFFY!", { wobbly = true } );
+	else
+		--self:playCharacterAnimation( "shock" );
+		self:showDialog( "I thought the title was in jest!" );
+		self:showDialog( "An entire movie about laughing children, and not one was in pain!" );
+		self:addPoints( -2 );
+		--self:playCharacterAnimation( "idle" );
+		self:showDialog( "How would you correct the mistakes of those filmmaking ignorami?" );
+		self:showChoice( "< He's deep in thought >", { { "Slowly lower the children into a pit of lava.", LavaPit },
+			{ "Drain the blood of the children into a bowl, then bathe in it.", BowlBlood },
+			{ "Place the children into iron maidens.", IronMaiden } } );
+	end
+
+	self:showDialog( "Now, what kind of base nourishment do they have at this establishment?" );
+	self:showChoice( "< He's sifting through the menu >", { { "Order his food for him.", StealOrder }, 
+		{ "Let him take his time.", TakeTime } } );
+
+	self:showChoice( "< The waiter is looking at you >", { { "A steak please.", SteakingAClaim },
+		{ "I'm in a health mood. Give me salad.", SalAdd } } );
+
+	self:showDialog( "Meals are one of the only times of the day when I do not think of torture and suffering." );
+	self:showChoice( "< He's lost in thought >", { { "Do you have any non-torture hobbies?", HobbyMaybe },
+		{ "You know, your look fantastic in your profile picture.", ProfilePicDistraction } } );
+
+	--self:playCharacterAnimation( "idle" );
+	self:showDialog( "We speak too much of Dae. I must hear more of you." );
+	self:showDialog( "What is your family like?" );
+
+end
+
+
 local run = function( self )
 	--PlayNarration( self );
 	--self:stopMusic( gAssets.MUSIC.narration );
 	--PresentGoatDatingProfile( self );
-	TheaterDate( self );
+	--TheaterDate( self );
+	self.movieAnswer = 0;
+	DinnerDate( self );
 end
 
 
