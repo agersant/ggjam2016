@@ -31,14 +31,25 @@ local PlayNarration = function( self )
 end
 
 
+local ConfirmProfile;
+ConfirmProfile = function( self )
+	self:waitForMainInput();
+	self:showChoice( "Did you memorize the key information about your date?", {
+		{ "I'll take another look", ConfirmProfile },
+		{ "I'm ready to go!", function( self ) end },
+	} );
+end
+
+
 local PresentGoatDatingProfile = function( self )
 	self:setDialogSpeed();
 	self:showDialog( "All demons are lonely creatures.\n\nIn our modern day world, the best way for a demon to find a companion is with FivePointedLove.com" );
+	self:fadeOut( 1 );
+	self:setBackground( gAssets.BG.profileGoat );
+	self:fadeIn( 2 );
 	self:showDialog( "Here is the profile of the first demon you must court.\n\nPay close attention to everything they include on their profile, any one piece of information could save your life." );
-	--self:showProfile( gAssets.PROFILES.goat );
-	self:wait( 3 );
-	self:waitForMainInput();
-	self:wait( 2 );
+	ConfirmProfile( self );
+	self:fadeOut( 3 );
 end
 
 
@@ -266,7 +277,7 @@ end
 
 local SteakingAClaim = function( self )
 	--self:playCharacterAnimation( "happy" )
-	self:showDialog( "I was worried for a second that you would make the incorrect choice." );
+	self:showDialog( "Yes, best to eat something which was once living. \nFilled with blood, organs and sinew. My mouth is watering just thinking about it." );
 	self:addPoints( 2 );
 end
 
@@ -463,8 +474,8 @@ end
 
 
 local DinnerDate = function( self )
-	self:fadeIn( 3 );
 	self:setBackground( gAssets.BG.dinner );
+	self:fadeIn( 3 );
 
 	if self.movieAnswer == 0 then
 		--self:playCharacterAnimation( "angry" );
@@ -502,7 +513,7 @@ local DinnerDate = function( self )
 	self:showChoice( "< The waiter is looking at you >", { { "A steak please.", SteakingAClaim },
 		{ "I'm in a health mood. Give me salad.", SalAdd } } );
 
-	self:showDialog( "Meals are one of the only times of the day when I do not think of torture and suffering." );
+	self:showDialog( "Meals are one of the few times of the day when I am not submerged in torture and suffering." );
 	self:showChoice( "< He's lost in thought >", { { "Do you have any non-torture hobbies?", HobbyMaybe },
 		{ "You know, your look fantastic in your profile picture.", ProfilePicDistraction } } );
 
@@ -516,7 +527,7 @@ local DinnerDate = function( self )
 	--self:playCharacterAnimation( "sad" );
 	self:showDialog( "How can I possibly be a good enough demon for Beelzebub himself?" );
 	self:setDialogSpeed( 12 );
-	self:showDialog( "\nDo you think I'm good enough?", { wobbly = true, ignoreInput = true } );
+	self:showDialog( "\nDo you think I'm good enough?", { wobbly = true } );
 	self:setDialogSpeed();
 	self:showChoice( "Uh oh", { { "You are good enough.", GoodEnough }, 
 		{ "You make me feel happy and safe.", HappyAndSafe },
@@ -673,7 +684,9 @@ local ParkingLotDate = function( self )
 			{ "I thank you for spending time with me Dae Son of Ez...", TheSpiel }, 
 			{ "Those lips are irresistible.", KissyKissy } } );
 
-	if self:getPoints() == PointMax then
+	print( self:getPoints() );
+
+	if self:getPoints() >= PointMax then
 		self:showDialog( "I know your true purpose, mortal.\n\nYou are an exorcist.")
 		self:showDialog( "Despite your profession." );
 		self:showDialog( "Despite your disgusting human body." );
@@ -687,11 +700,13 @@ local ParkingLotDate = function( self )
 		self:showDialog( "Thank you for freeing me." );
 		self:setDialogSpeed( 6 );
 		self:showDialog( "EXORCIST", { ignoreInput = true, wobbly = true } );
+		self:wait( 2 );
 		PlayTransformation( self );
 	elseif self:getPoints() >= 25 then
 		self:showDialog( "I've figured out your true purpose, mortal.\n\nYou are an exorcist." );
 		self:showDialog( "Our night has had its rough patches, but I think you have granted me true happiness." );
 		self:showDialog( "It is time for me to go." );
+		self:wait( 2 );
 		PlayTransformation( self );
 	else
 		self:kill();
@@ -728,7 +743,6 @@ local run = function( self )
 	self:stopMusic( gAssets.MUSIC.narration );
 	PresentGoatDatingProfile( self );
 	TheaterDate( self );
-	self.movieAnswer = 0;
 	DinnerDate( self );
 	ParkingLotDate( self );	
 end
