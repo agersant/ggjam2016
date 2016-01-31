@@ -16,7 +16,7 @@ MessageBox.new = function( scene, options )
 	self.textAlign = options.textAlign or "left";
 	
 	self.boxGradient = Gradient.new( self ).gradient( {
-		direction = 'horizontal',
+		direction = "horizontal",
 		{ 0, 100, 176, 200 },
 		{ 0, 100, 176, 0 },
 	} );
@@ -48,7 +48,7 @@ MessageBox.draw = function( self )
 	local ox = 0;
 	local oy = 0;
 	if self.wobbly then
-		local amplitude = 2.5;
+		local amplitude = 4;
 		ox = amplitude * math.random() - amplitude/2;
 		oy = amplitude * math.random() - amplitude/2;
 	end
