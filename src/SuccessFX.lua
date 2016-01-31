@@ -24,7 +24,7 @@ SuccessFX.play = function( self, position )
 	local startTime = love.timer.getTime();
 	while true do
 		local now = love.timer.getTime();
-		self.scaleFactor = math.min( startTime - now, 1 );
+		self.scaleFactor = math.min( now - startTime, 1 );
 		if now - startTime > 5 then
 			break;
 		end
@@ -41,8 +41,8 @@ end
 
 SuccessFX.draw = function( self )
 	for i, heart in ipairs( self.hearts ) do
-		love.graphics.setColor( 255, 0, 0, 255 );
-		love.graphics.rectangle( "fill", heart.x, heart.y, 32 * self.scaleFactor, 32 * self.scaleFactor );
+		love.graphics.setColor( 255, 255, 255, 255 );
+		love.graphics.draw( gAssets.CHAR.hearts, heart.x, heart.y, 0, self.scaleFactor, self.scaleFactor );
 	end
 end
 
