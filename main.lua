@@ -54,7 +54,8 @@ love.load = function()
 	gAssets.BG.monster = love.graphics.newImage("assets/bgs/monster.jpg");
 	gAssets.BG.mockup = love.graphics.newImage("assets/bgs/mockup.png");
 	gAssets.BG.black = love.graphics.newImage( "assets/bgs/Black.png");
-	
+	gAssets.BG.theater = love.graphics.newImage( "assets/bgs/MovieTheater.jpg" );
+
 	gAssets.FONT.dialogFont = love.graphics.newFont( "assets/font/PTS55F.ttf", 50 );
 	gAssets.CHAR.minnie = {
 		angry0 = love.graphics.newImage( "assets/portraits/minnie/angry0.png" );
@@ -72,7 +73,7 @@ end
 
 love.update = function( dt )
 	if not gCurrentScene then
-		local defaultScene = TestScene.new();
+		local defaultScene = GoatDateScene.new();
 		ChangeScene( defaultScene );
 	end
 	gCurrentScene:update();

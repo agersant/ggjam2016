@@ -15,6 +15,7 @@ Scene.new = function( runtime )
 	self.narrationBox = MessageBox.new( self, { showBox = false, y = 400, textAlign = "center" } );
 	self.fading = Fading.new( self );
 	self.choiceBox = ChoiceBox.new( self );
+	self.points = 0;
 	return self;
 end
 
@@ -147,6 +148,13 @@ Scene.playSound = function( self, soundName )
 	self.currentSound = soundName;
 
 	love.audio.play(self.soundName);
+end
+
+Scene.addPoints = function( self, pointsToAdd )
+	self.points = self.points + pointsToAdd;
+	if self.points < -10 then
+		--self.kill;
+	end
 end
 
 Scene.playMusic = function( self, musicName )
