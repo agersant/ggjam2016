@@ -179,6 +179,10 @@ Scene.addPoints = function( self, pointsToAdd )
 	end
 end
 
+Scene.getPoints = function( self )
+	return self.points;
+end
+
 Scene.setIntroText = function( self, text )
 	self.introText:setText( text );
 end
