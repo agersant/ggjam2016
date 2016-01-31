@@ -7,10 +7,25 @@ ReportCard.new = function( scene )
 	return self; 
 end
 
+ReportCard.round = function(num, idp)
+  local mult = 10^(idp or 0)
+  return math.floor(num * mult + 0.5) / mult
+end
+
 ReportCard.draw = function( self )
 	if not ( self.score ) then
 		return;
 	end
+
+	if self.score > 1 then
+		self.score = 1;
+	end
+	
+	if self.score < 0 then
+		self.score = 0;
+	end
+	
+	self.score = ReportCard.round( self.score, 2 );
 
 	love.graphics.setColor( 255, 0, 0, 255 );
 	love.graphics.rectangle( "fill", 800, 930, -700, -510 * self.score );
