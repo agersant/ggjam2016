@@ -9,6 +9,7 @@ function DateVampire( scene )
 	scene:startThread( someFunc ); -- returns a thread
 	scene:stopThread( thread );
 	scene:setDialogSpeed( charactersPerSecond ); -- pass nil for default
+	scene:setNarrationSpeed( charactersPerSecond ); -- pass nil for default
 	scene:showNarration( "Hello, welcome to this date", { wobbly = true } );
 	scene:showDialog( "Hello, welcome to this date", { ignoreInput = true, wobbly = true } );
 	scene:showChoice( { "a", outcomeA, }, { "b", outcomeB, } );

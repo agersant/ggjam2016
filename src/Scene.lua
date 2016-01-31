@@ -107,6 +107,10 @@ Scene.showDialog = function( self, text, options )
 	self.dialogBox:showText( text, options );
 end
 
+Scene.setNarrationSpeed = function( self, speed )
+	self.narrationBox:setSpeed( speed );
+end
+
 Scene.showNarration = function( self, text, options )
 	self.narrationBox:showText( text, options );
 end
