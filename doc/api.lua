@@ -9,16 +9,15 @@ function DateVampire( scene )
 	scene:setCharacterPose( "characterName" );
 	scene:waitForCharacterAnimation();
 	
-	scene:dialogChoice( { "a", callA, }, { "b", callB, } );
-	
-	
 	scene:playSound();
 	scene:playMusic();
 	
 	-- DONE
 	scene:wait( seconds );
-	scene:startThread( someFunc );
+	scene:startThread( someFunc ); -- returns a thread
+	scene:stopThread( thread );
 	scene:setDialogSpeed( charactersPerSecond ); -- pass nil for default
 	scene:showDialog( "Hello, welcome to this date", { wobbly = true } );
+	scene:showChoice( { "a", outcomeA, }, { "b", outcomeB, } );
 	
 end
