@@ -46,7 +46,7 @@ end
 
 Scene.startThread = function( self, runtime )
 	local thread = coroutine.create( runtime );
-	table.insert( self.threads, thread );
+	table.insert( self.threads, 1, thread );
 	return thread;
 end
 
@@ -78,6 +78,10 @@ Scene.wait = function( self, seconds )
 			coroutine.yield();
 		end
 	end
+end
+
+Scene.waitFrame = function( self )
+	coroutine.yield();
 end
 
 Scene.waitForKeyPress = function( self, isDown )
@@ -144,10 +148,13 @@ Scene.waitForCharacterAnimation = function( self )
 	self.portrait:waitForAnimation();
 end
 
+Scene.playSuccessFX = function( self )
+	self.portrait:playSuccessFX();
+end
+
 Scene.playSound = function( self, soundName )
 	self.currentSound = soundName;
-
-	love.audio.play(self.soundName);
+	love.audio.play( self.soundName );
 end
 
 Scene.addPoints = function( self, pointsToAdd )
