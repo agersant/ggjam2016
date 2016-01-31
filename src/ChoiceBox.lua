@@ -1,9 +1,16 @@
 local ChoiceBox = {};
 
 ChoiceBox.new = function( scene )
+	options = options or {};
 	local self = {};
 	SetClass( self, ChoiceBox );
 	self.scene = scene;
+	
+	self.width = 1600;
+	self.height = 330;
+	self.x = options.x or ( 1920 - self.width ) / 2;
+	self.y = options.y or 1080 - 40 - self.height;
+	
 	return self;
 end
 
@@ -11,17 +18,58 @@ ChoiceBox.draw = function( self )
 	if not self.question then
 		return;
 	end
-	love.graphics.setColor( 255, 255, 255 );
-	love.graphics.printf( self.question, 40, 200, 700, "left" );
-	local y = 0;
+	
+	local paddingX = 50;
+	local paddingYQuestion = 4;
+	local paddingYAnswers = 15;
+
+	love.graphics.setColor( 28, 28, 28, 255 );
+	love.graphics.rectangle( "fill", self.x, 1080 - (40 + 70 + (98 + 18) * #self.choices), self.width, 80 );
+	
+	love.graphics.setColor( 255, 255, 255, 255 );
+	love.graphics.printf( self.question, self.x + paddingX, 1080 - (40 + 70 + (98 + 18) * #self.choices) + paddingYQuestion, self.width - 2 * paddingX, "left", 0, 1, 1, ox, oy, 0, 0 );
+
 	for i, choice in ipairs( self.choices ) do
 		if i == self.focusedChoice then
-			love.graphics.setColor( 0, 255, 0 );
+			love.graphics.setColor( 36, 56, 97, 128 );
+			love.graphics.rectangle( "fill", self.x, 1080 - (40 + (98 + 18) * (#self.choices + 1 - i)) + 18, self.width, 98 );
+			
+			love.graphics.setColor( 0, 255, 252 );
+			
+			-- Borders
+			local thickness = 3;
+			love.graphics.rectangle( "fill", self.x, 1080 - (40 + (98 + 18) * (#self.choices + 1 - i)) + 18, thickness, 98 );
+			love.graphics.rectangle( "fill", self.x + self.width - thickness, 1080 - (40 + (98 + 18) * (#self.choices + 1 - i)) + 18, thickness, 98 );
+			love.graphics.rectangle( "fill", self.x, 1080 - (40 + (98 + 18) * (#self.choices + 1 - i)) + 18, self.width, thickness );
+			love.graphics.rectangle( "fill", self.x, 1080 - (40 + (98 + 18) * (#self.choices + 1 - i)) + 18 + 98, self.width, thickness );
+			-- Enough with the borders
+			
+			-- Triangle   35
+			love.graphics.polygon('fill', self.x + 6, 1080 - (40 + (98 + 18) * (#self.choices + 1 - i)) + 18 + 98 - 3, 
+										  self.x + 40, 1080 - (40 + (98 + 18) * (#self.choices + 1 - i)) + 18 + 98 - 3,
+										  self.x + 6, 1080 - (40 + (98 + 18) * (#self.choices + 1 - i)) + 18 + 98 - 37)
+
+			
+			
+			
+			
+			
+			love.graphics.printf( choice[1], self.x + paddingX, 1080 - (40 + (98 + 18) * (#self.choices + 1 - i)) + 18 + paddingYAnswers, self.width - 2 * paddingX, "left", 0, 1, 1, ox, oy, 0, 0 );
 		else
-			love.graphics.setColor( 255, 255, 255 );
+			love.graphics.setColor( 0, 0, 0, 128 );
+			love.graphics.rectangle( "fill", self.x, 1080 - (40 + (98 + 18) * (#self.choices + 1 - i)) + 18, self.width, 98 );
+			love.graphics.setColor( 255, 255, 255, 255 );
+			
+			-- Borders
+			local thickness = 3;
+			love.graphics.rectangle( "fill", self.x, 1080 - (40 + (98 + 18) * (#self.choices + 1 - i)) + 18, thickness, 98 );
+			love.graphics.rectangle( "fill", self.x + self.width - thickness, 1080 - (40 + (98 + 18) * (#self.choices + 1 - i)) + 18, thickness, 98 );
+			love.graphics.rectangle( "fill", self.x, 1080 - (40 + (98 + 18) * (#self.choices + 1 - i)) + 18, self.width, thickness );
+			love.graphics.rectangle( "fill", self.x, 1080 - (40 + (98 + 18) * (#self.choices + 1 - i)) + 18 + 98, self.width, thickness );
+			-- Enough with the borders
+			
+			love.graphics.printf( choice[1], self.x + paddingX, 1080 - (40 + (98 + 18) * (#self.choices + 1 - i)) + 18 + paddingYAnswers, self.width - 2 * paddingX, "left", 0, 1, 1, ox, oy, 0, 0 );
 		end
-		love.graphics.printf( choice[1], 40, 220 + y, 700, "left" );
-		y = y + 20;
 	end
 end
 

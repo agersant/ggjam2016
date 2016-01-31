@@ -20,7 +20,7 @@ run = function( self )
 	
 	self:showNarration( "I love tacos and demons, who doesnt love tacos or demons?", { ignoreInput = true, } );
 
-	self:setBackground( gAssets.BG.mockup );
+--	self:setBackground( gAssets.BG.mockup );
 	self:setCharacter( Minnie );
 	self:playCharacterAnimation( "idle" );
 
