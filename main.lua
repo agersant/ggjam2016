@@ -54,7 +54,9 @@ love.load = function()
 	gAssets.BG.monster = love.graphics.newImage("assets/bgs/monster.jpg");
 	gAssets.BG.mockup = love.graphics.newImage("assets/bgs/mockup.png");
 	gAssets.BG.black = love.graphics.newImage( "assets/bgs/Black.png");
-	gAssets.BG.theater = love.graphics.newImage( "assets/bgs/MovieTheater.jpg" );
+	gAssets.BG.theater = love.graphics.newImage( "assets/bgs/Theater.jpg" );
+	gAssets.BG.parking = love.graphics.newImage( "assets/bgs/ParkingLot.jpg" );
+	gAssets.BG.dinner = love.graphics.newImage( "assets/bgs/Dinner.jpg" );
 
 	gAssets.FONT.dialogFont = love.graphics.newFont( "assets/font/PTS55F.ttf", 50 );
 	gAssets.CHAR.minnie = {
