@@ -1,4 +1,5 @@
 local TestScene = require( "src/content/TestScene" );
+local GoatDateScene = require( "src/content/GoatDateScene" );
 
 
 -- Globals
@@ -52,8 +53,8 @@ love.load = function()
 	love.resize( love.graphics.getWidth(), love.graphics.getHeight() );
 	gAssets.BG.monster = love.graphics.newImage("assets/bgs/monster.jpg");
 	gAssets.BG.mockup = love.graphics.newImage("assets/bgs/mockup.png");
-	gAssets.SOUND.mySound = love.audio.newSource("assets/sounds/Jump.wav");
-	gAssets.MUSIC.mySound = love.audio.newSource("assets/music/mySound.ogg");
+	gAssets.BG.black = love.graphics.newImage( "assets/bgs/Black.png");
+	
 	gAssets.FONT.dialogFont = love.graphics.newFont( "assets/font/PTS55F.ttf", 50 );
 	gAssets.CHAR.minnie = {
 		angry0 = love.graphics.newImage( "assets/portraits/minnie/angry0.png" );
@@ -63,11 +64,15 @@ love.load = function()
 		sad0 = love.graphics.newImage( "assets/portraits/minnie/sad0.png" );
 		shocked0 = love.graphics.newImage( "assets/portraits/minnie/shocked0.png" );
 	};
+
+	gAssets.SOUND.mySound = love.audio.newSource("assets/sounds/Jump.wav");
+	gAssets.MUSIC.mySound = love.audio.newSource("assets/music/mySound.ogg");
+	gAssets.MUSIC.narration = love.audio.newSource( "assets/music/Narration.wav" );
 end
 
 love.update = function( dt )
 	if not gCurrentScene then
-		local defaultScene = TestScene.new();
+		local defaultScene = GoatDateScene.new();
 		ChangeScene( defaultScene );
 	end
 	gCurrentScene:update();
