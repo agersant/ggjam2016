@@ -4,8 +4,201 @@ local Minnie = require( "src/content/portraits/Minnie" );
 
 local MinnieDateScene = {};
 
+local ListenAllDay = function( self )
+	self:addPoints( 4 );
+	self:playCharacterAnimation( "hyped" );
+	self:showDialog( "Awwwww! You're so nice.", { wobbly = true } );
+	self:playCharacterAnimation( "idle" );
+	self:showDialog( "It reminds me of that time when Jenny " );
+	
+end
+
+local SorryLonely = function( self )
+	self:showDialog( "I always feel so alone, it's probably because I spend so much time in the maze. Also there's like no one ever at the VHS rental store. Fireflix stole all our customers long ago.", {} );
+	self:showDialog( "So I spend most of my time there like, watching the cool music videos.", {} );
+	self:wait( 1 );
+	self:playCharacterAnimation( "sad" );
+	self:showDialog( "I really shouldn't say any of that on a date. I'm like so sorry.", { wobbly = true } );
+	self:showDialog( "But I like that you're always listening to me. My friend Stephen never listens to anyone else, lol.", {} );
+	self:playCharacterAnimation( "idle" );
+	self:wait( 1 );
+	self:showChoice( "Time for your final move", {
+		{ "Hug her.", Hug },
+		{ "It's late I think we should get going.", GetGoing },
+		{ "I could listen to you all day", ListenAllDay },
+	} );
+end
+
+local WhatFriends = function( self )
+	self:addPoints( 2 );
+	self:showDialog( "Well." );
+	self:wait( 1 );
+	self:showDialog( "To tell you the truth, I don't see them that often." );
+	self:wait( 1 );
+	self:showDialog( "I don't know if I should be telling you this but...", { wobbly = true } );
+	self:showDialog( "I've like, never met Stephen, Jenny and Amanda.", { wobbly = true } );
+	self:wait( 1 );
+	self:showDialog( "I totally wish they were my friends for real.", {} );
+	SorryLonely( self );
+end
+
+local ParkingLot = function( self )
+	self:setBackground( gAssets.BG.parking );
+	self:playMusic( gAssets.MUSIC.parkingLot );
+	self:fadeIn( 2 );
+	if self.gotMilk or self.quesadilla then
+		self:showDialog( "<Minnie-T looks very pale, it seems she isn't feeling well.>" );
+		self:wait( 1 );
+		if self.gotMilk and self.quesadilla then
+			self:showDialog( "<You wonder if it's related to these dairy products she's been eating throughout the date.>" );
+			self:addPoints( -6 );
+		else
+			self:addPoints( -2 );
+		end
+	end
+	self:showDialog( "I had a pretty good time with you tonight, it was like so much fun." );
+	self:wait( 2 );
+	self:showDialog( "It's good to hang out with someone else for a while. I'm like, so lonely being lockup by my father all the time." );
+	self:showChoice( "Minnie-T seems a bit down.", {
+		{ "What about Amanda and your other friends?", WhatFriends },
+		{ "I'm sorry you feel lonely.", SorryLonely },
+	} );
+end
+
+local AskHerSomething = function( self )
+	self:showDialog( "TODO more stuff" );
+	ParkingLot( self );
+end
+
+local Penne = function( self )
+	self:addPoints( 2 );
+end
+
+local Shroom = function( self )
+end
+
+local Quesadilla = function( self )
+	self.quesadilla = true;
+end
+
+local Quinoa = function( self )
+	self.quinoa = true;
+	self:addPoints( 3 );
+end
+
+local OrderFood = function( self )
+	self:wait( 1 );
+	self:showDialog( "What do you think I should order?" );
+	self:showChoice( "Make a suggestion", {
+		{ "The tofu quesadilla!", Quesadilla },
+		{ "The organic quinoa dumplings", Quinoa },
+	} );
+	self:showDialog( "Interesting choice, I think I'll go with that!" );
+	self:showChoice( "Now your own food order:", {
+		{ "Penne Marinara", Penne },
+		{ "Portobello Mushroom Burger", Shroom  },
+	} );
+	self:showDialog( "That sounds totally tasty. I love eating like all sorts of food but there's a lot I can't at all." );
+	self:showDialog( "Because I'm a vegetarian.", { wobbly = false } );
+	self:showDialog( "And also lactose intolerant.", { wobbly = true } );
+	AskHerSomething( self );
+end
+
+local FriendsSpiel = function( self )
+	self:playCharacterAnimation( "idle" );
+	self:showDialog( "I wish my friend Stephen was with us, he would totally have digged this movie! But then I guess it wouldn't really be a date, lol." );
+	self:wait( 1 );
+	self:playCharacterAnimation( "sad" );
+	self:showDialog( "Sometimes when my friends aren't here, I try to imagine that they are and what their reactions would be. Do you sometimes do that? I hope you don't think it's like creepy or anything. It's a habit I totally picked up when I was SO locked in my father's labyrinth." );
+	self:showDialog( "It was like, so rough back then." );
+	self:playCharacterAnimation( "shocked" );
+	self:showDialog( "Please ignore I said that!!", { wobbly = true } );
+	self:playCharacterAnimation( "idle" );
+	OrderFood( self );
+end
+
+local ConcludeTacos = function( self )
+	self:playCharacterAnimation( "happy" );
+	self:showDialog( "Also I liked that scene at the end where all the various tacos totally join forces to defeat the big bad burrito. It made me heart beat like, so fast." );
+	FriendsSpiel( self );
+end
+
+local LoveTacos = function( self )
+	self:playCharacterAnimation( "hyped" );
+	self:showDialog( "O M G! I'm also like totally a fan of tacos. My friend Patty makes the best tofu tacos in the world. Like really, I've never had better tacos." );
+	self:addPoints( 4 );
+	ConcludeTacos( self );
+end
+
+local PowerFriendship = function( self )
+	self:showDialog( "Totally! It's like the most important thing in my life too. Like, I don't know what I would do without my friends Jenny and Stephen." );
+	self:addPoints( 4 );
+	ConcludeTacos( self );
+end
+
+local FightBear = function( self )
+	self:showDialog( "I don't know about that, lol. I think the bear was like totally cute." );
+	self:showDialog( "Not cute like in a romantic way, but still kinda cute like you'd want to hug it and protect it. I don't know, I think animals are cute, it's sad you have to fight them sometimes." );
+	self:showDialog( "Like that one time when my friend Jenny threw a starfish at my other friend, and then the starfish got all mad at us." );
+	self:addPoints( -2 );
+	self:showDialog( "It was like, so totally weird. But we had a good time with my friends that day." );
+	FriendsSpiel( self );
+end
+
+local Brutal = function( self )
+	self:playCharacterAnimation( "angry" );
+	self:showDialog( "You're such a monster, lol. We're like completely different you and I." );
+	self:addPoints( -4 );
+	self:playCharacterAnimation( "idle" );
+	self:wait( 1 );
+	self:showDialog( "But it's ok, it's like totally cool not to be into the sane things all the time. I have so many friends, we can't be all alike, lol! Like my friend Amanda is so weird, sometimes she wears a tutu to her job. And she's like a lawyer." );
+	FriendsSpiel( self );
+end
+
+local Psychology = function( self )
+	self:showDialog( "You think so? All they did was scream at each other and getting dismembered" );
+	self:showDialog( "I was like, so spooked the whole time. My friend Stephen is into that kind of movie, but I think they're like, so weird. So he said to me \"You like broccoli right? Well I think THAT's gross.\" And I was like wow, it's like different people can totally be into different stuff." );
+	self:addPoints( -2 );
+	self:wait( 1 );
+	self:showDialog( "Isn't it beautiful?", { ignoreInput = true, wobbly = true, } );
+	self:wait( 1 );
+	FriendsSpiel( self );
+end
+
 local PostMovie = function( self )
-	self:showDialog( "TBC" );
+	self:fadeOut( 2 );
+	self:setBackground( gAssets.BG.black );
+	self:fadeIn( 2 );
+	self:showDialog( "<There are funny sounds coming from Minnie-T's belly.>" );
+	self:wait( .5 );
+	if self.gotMilk then
+		self:showDialog( "<You wonder if that's related to the milkshakes.>" );
+	else
+		self:showDialog( "<Maybe she's a bit hungry. You decide to go to the restaurant>" );
+	end
+	self:fadeOut( 2 );
+	self:setBackground( gAssets.BG.dinner );
+	self:fadeIn( 2 );
+	self:playCharacterAnimation( "happy" );
+	self:showDialog( "So like, what did you think of the movie?" );
+	if self.kicked then
+		self:showDialog( "I wish we got to see the whole thing." );
+	end
+	self:playCharacterAnimation( "idle" );
+	local choices = {};
+	if self.movie == "tacos" then
+		table.insert( choices, { "I loved it, I'm a big fan of martial arts and tacos.", LoveTacos } );
+		table.insert( choices, { "I loved it, it shows the power of friendship is invincible.", PowerFriendship } );
+	end
+	if self.movie == "alone" then
+		table.insert( choices, { "I loved it, it really makes you think about friendship.", PowerFriendship } );
+		table.insert( choices, { "I loved it, it's cool how he fought the bear at the end.", FightBear } );
+	end
+	if self.movie == "chop" then
+		table.insert( choices, { "I loved it, it was brutal just like me.", Brutal } );
+		table.insert( choices, { "I loved it, the psychology of the characters was so deep.", Psychology } );
+	end
+	self:showChoice( "Your thoughts on the movie", choices );
 end
 
 local IgnoreThem = function( self )
@@ -27,7 +220,7 @@ local IgnoreThem = function( self )
 	self:wait( .5 );
 	self:playCharacterAnimation( "idle" );
 	self:showDialog( "And it's shaped more like an artichoke too. Seriously, it totally is. Don't you trash talk Joey like that, he's such a sweetheart and he's the best thing on screen in this movie." );
-	self:setDialogSpeed( 40 );
+	self:setDialogSpeed( 50 );
 	self:showDialog( "I know because my dad organized a party for his company two years ago and he invited Joey and also other stars and they all were like d", { ignoreInput = true} );
 	self:showDialog( "<Before she can continue on, you are asked by a manager to leave the theater.>", {} );
 	self.kicked = true;
@@ -57,7 +250,7 @@ local WatchMovie = function( self )
 	self:setBackground( gAssets.BG.black );
 	self:fadeIn( 1 );
 	self:showDialog( "<While the movie is playing, the spectators next to you start talking about how the lead actor's nose looks like a potato.>" );
-	self:showChoice( "How will you react", {
+	self:showChoice( "How will you react?", {
 		{ "Ignore them.", IgnoreThem },
 		{ "Politely ask them to be quiet.", BeQuiet },
 		{ "Exhort them to leave the theater.", PleaseLeave },
@@ -182,7 +375,6 @@ local Beach = function( self )
 	self:showDialog( "And you know what, my friend Patrick told me yesterday", { ignoreInput = true } );
 	self:setDialogSpeed();
 	self:playCharacterAnimation( "happy" );
-	self:wait( 1 );
 	self:showDialog( "<Minnie-T keeps talking about her friends for a few minutes>" );
 	self:playCharacterAnimation( "idle" );
 end
@@ -307,13 +499,14 @@ local PlayNarration = function( self )
 	PresentDatingProfile( self );
 end
 
-local run = function( self )
-	PlayNarration( self );
+local FailMinnie = function( self )
+	
 end
 
-
 MinnieDateScene.new = function()
-	return Scene.new( run );
+	local scene = Scene.new( PlayNarration );
+	scene.kill = FailMinnie;
+	return scene;
 end
 
 
