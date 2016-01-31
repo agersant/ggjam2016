@@ -63,6 +63,9 @@ Scene.startThread = function( self, runtime )
 	if not ok then
 		error( errorMessage );
 	end
+	if coroutine.status( thread.routine ) == "dead" then
+		thread.kill = true;
+	end
 	return thread;
 end
 
