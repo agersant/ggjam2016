@@ -56,6 +56,9 @@ Portrait.setCharacter = function( self, character )
 end
 
 Portrait.playAnimation = function( self, animationName )
+	if not self.character then
+		return;
+	end
 	self:stopAnimation();
 	self.image = nil;
 	self.wobbleAmount = 0;

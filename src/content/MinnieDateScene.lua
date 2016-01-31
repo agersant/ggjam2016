@@ -1,16 +1,67 @@
 local Scene = require( "src/Scene" );
 local Minnie = require( "src/content/portraits/Minnie" );
+local FinalScene = require( "src/content/FinalScene" );
 
 
 local MinnieDateScene = {};
+
+local ReportCard = function( self, tragicEnd )
+	self:fadeOut( 2 );
+	local success;
+	local rate = self:getPoints() / self.maxPoints;
+	if tragicEnd then
+		success = false;
+	else
+		success = rate > self.winRate;
+	end
+	self:showReport( success, rate );
+	self:fadeIn( 1 );
+	self:waitForMainInput();
+	ChangeScene( FinalScene.new() );
+end
+
+local Hug = function( self )
+	-- local rate = self:getPoints() / self.maxPoints;
+	-- local success = rate > self.winRate;
+	local success = true;
+	if success then
+		self:showDialog( "< You feel the warmth and the smell of hur fur as you get close to her. >", { ignoreInput = true, } );
+		self:wait( 4 );
+		self:showDialog( "< In a way, this is almost romantic. >", { ignoreInput = true, } );
+		self:wait( 4 );
+		self:showDialog( "< But business is business, and this date has come to an end. >", { ignoreInput = true, } );
+		self:playCharacterAnimation( "hyped" );
+		self:playSuccessFX();
+		self:wait( 3 );
+		self:playSuccessFX();
+		self:setDialogSpeed( 8 );
+		self:playCharacterAnimation( "exit" );
+		self:showDialog( "Thank you so much!!!", { wobbly = true, ignoreInput = true, } );
+		self:wait( 5 );
+		self:fadeOut( 5 );
+	else
+		self:showDialog( "I don't think we're that close to each other. Could you like, keep your distances for the time being. Ok, please?" );
+		self:wait( 1 );
+		self:showDialog( "Thanks for the evening. I'll talk to you, like later." );
+	end
+	ReportCard( self );
+end
+
+local GetGoing = function( self )
+	-- TODO lame ending
+end
 
 local ListenAllDay = function( self )
 	self:addPoints( 4 );
 	self:playCharacterAnimation( "hyped" );
 	self:showDialog( "Awwwww! You're so nice.", { wobbly = true } );
 	self:playCharacterAnimation( "idle" );
-	self:showDialog( "It reminds me of that time when Jenny " );
-	
+	self:showDialog( "It reminds me of that time when Jenny and I went to the gym and she spilled a coke latte on her couch, like all over him." );
+	-- TODO more shit
+	self:showChoice( "Time for your true final move!", {
+		{ "Hug her.", Hug },
+		{ "It's late I think we should get going.", GetGoing },
+	} );
 end
 
 local SorryLonely = function( self )
@@ -47,10 +98,10 @@ local ParkingLot = function( self )
 	self:playMusic( gAssets.MUSIC.parkingLot );
 	self:fadeIn( 2 );
 	if self.gotMilk or self.quesadilla then
-		self:showDialog( "<Minnie-T looks very pale, it seems she isn't feeling well.>" );
+		self:showDialog( "< Minnie-T looks very pale, it seems she isn't feeling well. >" );
 		self:wait( 1 );
 		if self.gotMilk and self.quesadilla then
-			self:showDialog( "<You wonder if it's related to these dairy products she's been eating throughout the date.>" );
+			self:showDialog( "< You wonder if it's related to these dairy products she's been eating throughout the date. >" );
 			self:addPoints( -6 );
 		else
 			self:addPoints( -2 );
@@ -169,12 +220,12 @@ local PostMovie = function( self )
 	self:fadeOut( 2 );
 	self:setBackground( gAssets.BG.black );
 	self:fadeIn( 2 );
-	self:showDialog( "<There are funny sounds coming from Minnie-T's belly.>" );
+	self:showDialog( "< There are funny sounds coming from Minnie-T's belly. >" );
 	self:wait( .5 );
 	if self.gotMilk then
-		self:showDialog( "<You wonder if that's related to the milkshakes.>" );
+		self:showDialog( "< You wonder if that's related to the milkshakes. >" );
 	else
-		self:showDialog( "<Maybe she's a bit hungry. You decide to go to the restaurant>" );
+		self:showDialog( "< Maybe she's a bit hungry. You decide to go to the restaurant. >" );
 	end
 	self:fadeOut( 2 );
 	self:setBackground( gAssets.BG.dinner );
@@ -204,7 +255,7 @@ end
 local IgnoreThem = function( self )
 	self:addPoints( 3 );
 	self:setDialogSpeed( 8 );
-	self:showDialog( "<...>", { ignoreInput = true, } );
+	self:showDialog( "< ... >", { ignoreInput = true, } );
 	self:setDialogSpeed();
 	self:showDialog( "< The babbling intensifies! >" );
 	self:wait( 1 );
@@ -498,11 +549,20 @@ local PlayNarration = function( self )
 end
 
 local FailMinnie = function( self )
-	
+	self:playCharacterAnimation( "angry" );
+	self:wait( 2 );
+	self:playCharacterAnimation( "idle" );
+	self:showDialog( "I don't think I'm feeling too well. I think I'm going to head home." );
+	self:wait( 2 );
+	self:showDialog( "I'll talk to you like, later." );
+	ReportCard( self, true );
 end
+
 
 MinnieDateScene.new = function()
 	local scene = Scene.new( PlayNarration );
+	scene.maxPoints = 25;
+	scene.winRate = .7;
 	scene.kill = FailMinnie;
 	return scene;
 end

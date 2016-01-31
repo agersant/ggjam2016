@@ -36,6 +36,10 @@ Minnie.playAngry = function( self )
 end
 
 Minnie.playExit = function( self )
+	self.portrait:setWobble( 25 );
+	self.portrait:setImage( gAssets.CHAR.minnie.hyped0 );
+	self.scene:wait( 5 );
+	self.portrait:setWobble( 0 );
 	self.portrait:setImage( gAssets.CHAR.minnie.exit0 );
 end
 
