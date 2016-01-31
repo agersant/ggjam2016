@@ -20,13 +20,18 @@ Scene.new = function( runtime )
 end
 
 Scene.update = function( self )
+	for i = 1, #self.threads do
+		local thread = self.threads[i];
+		if not thread.kill then
+			local ok, errorMessage = coroutine.resume( thread.routine, self );
+			if not ok then
+				error( errorMessage );
+			end
+		end
+	end
 	for i = #self.threads, 1, -1 do
 		local thread = self.threads[i];
-		local ok, errorMessage = coroutine.resume( thread, self );
-		if not ok then
-			error( errorMessage );
-		end
-		if coroutine.status( thread ) == "dead" then
+		if coroutine.status( thread.routine ) == "dead" or thread.kill then
 			table.remove( self.threads, i );
 		end
 	end
@@ -45,15 +50,16 @@ Scene.draw = function( self )
 end
 
 Scene.startThread = function( self, runtime )
-	local thread = coroutine.create( runtime );
-	table.insert( self.threads, 1, thread );
+	local routine = coroutine.create( runtime );
+	local thread = { routine = routine };
+	table.insert( self.threads, thread );
 	return thread;
 end
 
 Scene.stopThread = function( self, thread )
 	for i = #self.threads, 1, -1 do
 		if thread == self.threads[i] then
-			table.remove( self.threads, i );
+			self.threads[i].kill = true;
 			break;
 		end
 	end
@@ -62,7 +68,7 @@ end
 Scene.isThreadAlive = function( self, thread )
 	for i = #self.threads, 1, -1 do
 		if thread == self.threads[i] then
-			return true;
+			return not thread.kill;
 		end
 	end
 	return false;
