@@ -18,13 +18,15 @@ run = function( self )
 --	self:fadeIn( 2 );
 --	self:fadeOut( 2 );
 	
-	self:showNarration( "I love tacos and demons, who doesnt love tacos or demons?", { ignoreInput = true, } );
+	-- self:showNarration( "I love tacos and demons, who doesnt love tacos or demons?", { ignoreInput = true, } );
 
 --	self:setBackground( gAssets.BG.mockup );
 	self:setCharacter( Minnie );
 	self:playCharacterAnimation( "idle" );
+	self:playSuccessFX();
 
-	self:fadeIn( 2 );
+
+	-- self:fadeIn( 2 );
 
 
 	self:showChoice( "Hey, do you like tacos?", {
