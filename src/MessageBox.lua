@@ -66,7 +66,7 @@ MessageBox.showText = function( self, text, options )
 	self.currentText = "";
 	self.wobbly = options.wobbly;
 	self.allowInput = not options.ignoreInput;
-	local textSpeed = self.textSpeed or 12;
+	local textSpeed = self.textSpeed or 28;
 	local startTime = love.timer.getTime();
 	local releasedInput = false;
 	while #self.currentText < #text do
