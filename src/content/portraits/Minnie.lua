@@ -17,6 +17,8 @@ Minnie.playAnimation = function( self, animationName )
 		return self:playExit();
 	elseif animationName == "happy" then
 		return self:playHappy();
+	elseif animationName == "hyped" then
+		return self:playHyped();
 	elseif animationName == "idle" then
 		return self:playIdle();
 	elseif animationName == "sad" then
@@ -38,7 +40,16 @@ Minnie.playExit = function( self )
 end
 
 Minnie.playHappy = function( self )
-	self.portrait:setImage( gAssets.CHAR.minnie.happy0 );
+	while true do
+		self.portrait:setImage( gAssets.CHAR.minnie.happy0 );
+		self.scene:wait( .5 );
+		self.portrait:setImage( gAssets.CHAR.minnie.happy1 );
+	end
+end
+
+Minnie.playHyped = function( self )
+	self.portrait:setWobble( 15 );
+	self.portrait:setImage( gAssets.CHAR.minnie.hyped0 );
 end
 
 Minnie.playIdle = function( self )
