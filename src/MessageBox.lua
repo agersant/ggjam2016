@@ -65,6 +65,7 @@ MessageBox.showText = function( self, text, options )
 	options = options or {};
 	self.currentText = "";
 	self.wobbly = options.wobbly;
+	self.allowInput = not options.ignoreInput;
 	local textSpeed = self.textSpeed or 12;
 	local startTime = love.timer.getTime();
 	local releasedInput = false;
@@ -73,13 +74,15 @@ MessageBox.showText = function( self, text, options )
 		local now = love.timer.getTime();
 		local textSpeedScale = 1;
 		local numChars = math.ceil( ( now - startTime ) * textSpeed * textSpeedScale );
-		if releasedInput and IsMainInputDown() then
+		if releasedInput and IsMainInputDown() and self.allowInput then
 			numChars = #text;
 		end
 		self.currentText = string.sub( text, 1, numChars );
 		coroutine.yield();
 	end
-	self.scene:waitForMainInput();
+	if self.allowInput then
+		self.scene:waitForMainInput();
+	end
 	self.currentText = nil;
 end
 
