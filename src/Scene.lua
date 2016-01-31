@@ -168,7 +168,7 @@ end
 
 Scene.addPoints = function( self, pointsToAdd )
 	self.points = self.points + pointsToAdd;
-	if self.points < -10 then
+	if self.points < 0 then
 		--self.kill;
 	end
 end

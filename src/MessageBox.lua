@@ -82,6 +82,8 @@ MessageBox.showText = function( self, text, options )
 	end
 	if self.allowInput then
 		self.scene:waitForMainInput();
+	else
+		self.scene:wait( 0.3 );
 	end
 	self.currentText = nil;
 end
