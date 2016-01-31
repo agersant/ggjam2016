@@ -10,7 +10,6 @@ Scene.new = function( runtime )
 	local self = {};
 	SetClass( self, Scene );
 	self.threads = {};
-	self:startThread( runtime );
 	self.portrait = Portrait.new( self );
 	self.dialogBox = MessageBox.new( self );
 	self.narrationBox = MessageBox.new( self, { showBox = false, y = 400, textAlign = "center" } );
@@ -18,6 +17,7 @@ Scene.new = function( runtime )
 	self.introText = IntroText.new( self );
 	self.choiceBox = ChoiceBox.new( self );
 	self.points = 0;
+	self:startThread( runtime );
 	return self;
 end
 
@@ -56,6 +56,10 @@ Scene.startThread = function( self, runtime )
 	local routine = coroutine.create( runtime );
 	local thread = { routine = routine };
 	table.insert( self.threads, thread );
+	local ok, errorMessage = coroutine.resume( thread.routine, self );
+	if not ok then
+		error( errorMessage );
+	end
 	return thread;
 end
 
@@ -170,6 +174,8 @@ Scene.addPoints = function( self, pointsToAdd )
 	self.points = self.points + pointsToAdd;
 	if self.points < 0 then
 		--self.kill;
+	elseif pointsToAdd >= 4 then
+		self:playSuccessFX();
 	end
 end
 

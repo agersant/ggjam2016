@@ -1,11 +1,13 @@
 local TestScene = require( "src/content/TestScene" );
 local GoatDateScene = require( "src/content/GoatDateScene" );
+local MinnieDateScene = require( "src/content/MinnieDateScene" );
 
 
 -- Globals
 
 refWidth = 1920;
 refHeight = 1080;
+startScene = MinnieDateScene;
 gCurrentScene = nil;
 gRenderOffset = { x = 0, y = 0 };
 gRenderScale = 1;
@@ -66,6 +68,8 @@ love.load = function()
 		angry0 = love.graphics.newImage( "assets/portraits/minnie/angry0.png" );
 		exit0 = love.graphics.newImage( "assets/portraits/minnie/exit0.png" );
 		happy0 = love.graphics.newImage( "assets/portraits/minnie/happy0.png" );
+		happy1 = love.graphics.newImage( "assets/portraits/minnie/happy1.png" );
+		hyped0 = love.graphics.newImage( "assets/portraits/minnie/hyped0.png" );
 		idle0 = love.graphics.newImage( "assets/portraits/minnie/idle0.png" );
 		sad0 = love.graphics.newImage( "assets/portraits/minnie/sad0.png" );
 		shocked0 = love.graphics.newImage( "assets/portraits/minnie/shocked0.png" );
@@ -78,8 +82,8 @@ end
 
 love.update = function( dt )
 	if not gCurrentScene then
-		local defaultScene = GoatDateScene.new();
-		ChangeScene( defaultScene );
+		local scene = startScene.new();
+		ChangeScene( scene );
 	end
 	gCurrentScene:update();
 end
