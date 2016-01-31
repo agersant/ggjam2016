@@ -5,10 +5,6 @@ function DateVampire( scene )
 	scene:fadeOut( seconds );
 	scene:fadeIn( seconds );
 
-	scene:setCharacter( "characterName" );
-	scene:setCharacterPose( "characterName" );
-	scene:waitForCharacterAnimation();
-	
 	scene:playSound();
 	scene:playMusic();
 	
@@ -19,5 +15,7 @@ function DateVampire( scene )
 	scene:setDialogSpeed( charactersPerSecond ); -- pass nil for default
 	scene:showDialog( "Hello, welcome to this date", { wobbly = true } );
 	scene:showChoice( { "a", outcomeA, }, { "b", outcomeB, } );
-	
+	scene:setCharacter( characterClass ); -- dont forget to import the character in your scene
+	scene:playCharacterAnimation( "anim" );
+	scene:waitForCharacterAnimation();
 end
