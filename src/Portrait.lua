@@ -1,17 +1,18 @@
+local SuccessFX = require( "src/SuccessFX" );
+
 local Portrait = {};
 
 Portrait.new = function( scene )
 	local self = {};
 	SetClass( self, Portrait );
 	self.scene = scene;
-	self:reset();
-	return self;
-end
-
-Portrait.reset = function( self )
+	
 	self.image = nil;
 	self.offset = { x = 0, y = 0, };
+	self.fxPosition = { x = 0, y = 0, };
 	self.wobbleAmount = 0;
+	
+	return self;
 end
 
 Portrait.draw = function( self )
@@ -25,7 +26,18 @@ Portrait.draw = function( self )
 		love.graphics.translate( self.offset.x, self.offset.y );
 		love.graphics.setColor( 255, 255, 255, 255 );
 		love.graphics.draw( self.image );
+		
+		if self.successFX then
+			self.successFX:draw();
+		end
+		
 		love.graphics.pop();
+	end
+end
+
+Portrait.stopAnimation = function( self )
+	if self.currentAnimation then
+		self.scene:stopThread( self.currentAnimation );
 	end
 end
 
@@ -34,15 +46,19 @@ end
 -- API for scene
 
 Portrait.setCharacter = function( self, character )
+	self.image = nil;
+	self.wobbleAmount = 0;
+	self.offset = { x = 0, y = 0, };
+	self.fxPosition = { x = 0, y = 0, };
+	self:stopAnimation();
 	self.character = character.new( self.scene, self );
 	assert( self.character.playAnimation );
 end
 
 Portrait.playAnimation = function( self, animationName )
-	if self.currentAnimation then
-		self.scene:stopThread( self.currentAnimation );
-	end
-	self:reset();
+	self:stopAnimation();
+	self.image = nil;
+	self.wobbleAmount = 0;
 	local animate = function()
 		self.character:playAnimation( animationName );
 	end;
@@ -58,6 +74,16 @@ Portrait.waitForAnimation = function( self )
 	end
 end
 
+Portrait.playSuccessFX = function( self )
+	if self.successFXThread then
+		self.scene:stopThread( self.successFXThread );
+	end
+	self.successFX = SuccessFX.new( self.scene );
+	local play = function()
+		self.successFX:play( self.fxPosition );
+	end
+	self.successFXThread = self.scene:startThread( play );
+end
 
 
 -- API for character
@@ -73,6 +99,11 @@ end
 Portrait.setOffset = function( self, x, y )
 	self.offset.x = x;
 	self.offset.y = y;
+end
+
+Portrait.setFXPosition = function( self, x, y )
+	self.fxPosition.x = x;
+	self.fxPosition.y = y;
 end
 
 return Portrait;
