@@ -64,6 +64,7 @@ love.load = function()
 	gAssets.BG.profileGoat = love.graphics.newImage( "assets/bgs/ProfileGoat.jpg" );
 	gAssets.BG.profileMinnie = love.graphics.newImage( "assets/bgs/ProfileMinnie.jpg" );
 	gAssets.BG.titleScreen = love.graphics.newImage( "assets/bgs/TitleScreen.jpg" );
+	gAssets.BG.reportCard = love.graphics.newImage( "assets/bgs/report.png" );
 
 	gAssets.FONT.dialogFont = love.graphics.newFont( "assets/font/PTS55F.ttf", 50 );
 	gAssets.FONT.introTextFont = love.graphics.newFont( "assets/font/PTS55F.ttf", 100 );

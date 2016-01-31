@@ -739,12 +739,15 @@ end
 
 local run = function( self )
 	self.kill = KillFunction;
-	PlayNarration( self );
-	self:stopMusic( gAssets.MUSIC.narration );
-	PresentGoatDatingProfile( self );
-	TheaterDate( self );
-	DinnerDate( self );
-	ParkingLotDate( self );	
+--	PlayNarration( self );
+--	self:stopMusic( gAssets.MUSIC.narration );
+--	PresentGoatDatingProfile( self );
+--	TheaterDate( self );
+--	DinnerDate( self );
+--	ParkingLotDate( self );	
+
+	self:showReport( true, 0.65 );
+
 end
 
 
