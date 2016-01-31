@@ -32,7 +32,8 @@ end
 
 Scene.draw = function( self )
 	love.graphics.setColor( 255, 255, 255, 255 );
-	
+
+
 	if ( self.currentBackground ) then
 		love.graphics.draw(self.currentBackground, 0, 0);
 	end
@@ -41,8 +42,6 @@ Scene.draw = function( self )
 	self.dialogBox:draw();
 	self.choiceBox:draw();
 	self.fading:draw();
-	
-
 end
 
 Scene.startThread = function( self, runtime )
@@ -58,6 +57,15 @@ Scene.stopThread = function( self, thread )
 			break;
 		end
 	end
+end
+
+Scene.isThreadAlive = function( self, thread )
+	for i = #self.threads, 1, -1 do
+		if thread == self.threads[i] then
+			return true;
+		end
+	end
+	return false;
 end
 
 Scene.wait = function( self, seconds )
@@ -114,6 +122,18 @@ end
 
 Scene.setBackground = function( self, imageName )
 	self.currentBackground = imageName;
+end
+
+Scene.setCharacter = function( self, character )
+	self.portrait:setCharacter( character );
+end
+
+Scene.playCharacterAnimation = function( self, animationName )
+	self.portrait:playAnimation( animationName );
+end
+
+Scene.waitForCharacterAnimation = function( self )
+	self.portrait:waitForAnimation();
 end
 
 Scene.playSound = function( self, soundName )

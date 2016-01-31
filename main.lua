@@ -50,13 +50,19 @@ end
 
 love.load = function()
 	love.resize( love.graphics.getWidth(), love.graphics.getHeight() );
+	gAssets.BG.monster = love.graphics.newImage("assets/bgs/monster.jpg");
 	gAssets.BG.mockup = love.graphics.newImage("assets/bgs/mockup.png");
-
 	gAssets.SOUND.mySound = love.audio.newSource("assets/sounds/Jump.wav");
 	gAssets.MUSIC.mySound = love.audio.newSource("assets/music/mySound.ogg");
-	
 	gAssets.FONT.dialogFont = love.graphics.newFont( "assets/font/PTS55F.ttf", 50 );
-
+	gAssets.CHAR.minnie = {
+		angry0 = love.graphics.newImage( "assets/portraits/minnie/angry0.png" );
+		exit0 = love.graphics.newImage( "assets/portraits/minnie/exit0.png" );
+		happy0 = love.graphics.newImage( "assets/portraits/minnie/happy0.png" );
+		idle0 = love.graphics.newImage( "assets/portraits/minnie/idle0.png" );
+		sad0 = love.graphics.newImage( "assets/portraits/minnie/sad0.png" );
+		shocked0 = love.graphics.newImage( "assets/portraits/minnie/shocked0.png" );
+	};
 end
 
 love.update = function( dt )
