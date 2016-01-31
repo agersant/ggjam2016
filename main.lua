@@ -50,6 +50,7 @@ end
 love.load = function()
 	love.resize( love.graphics.getWidth(), love.graphics.getHeight() );
 	gAssets.BG.monster = love.graphics.newImage("assets/bgs/monster.jpg");
+	gAssets.BG.mockup = love.graphics.newImage("assets/bgs/mockup.png");
 	gAssets.SOUND.mySound = love.audio.newSource("assets/sounds/Jump.wav");
 	gAssets.MUSIC.mySound = love.audio.newSource("assets/music/mySound.ogg");
 	gAssets.CHAR.minnie = {

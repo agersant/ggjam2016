@@ -9,8 +9,8 @@ end
 
 Fading.draw = function( self )
 	if self.alpha then
-		love.graphics.setColor(166, 166, 166, self.alpha);
-		love.graphics.rectangle("fill", 0, 0, 1920, 1080 );
+		love.graphics.setColor( 0, 0, 0, self.alpha );
+		love.graphics.rectangle( "fill", 0, 0, 1920, 1080 );
 	end
 end
 

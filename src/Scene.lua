@@ -31,6 +31,8 @@ Scene.update = function( self )
 end
 
 Scene.draw = function( self )
+	love.graphics.setColor( 255, 255, 255, 255 );
+	love.graphics.draw( self.currentBackground, 0, 0 );
 	self.portrait:draw();
 	self.dialogBox:draw();
 	self.choiceBox:draw();
