@@ -1,5 +1,6 @@
 local MessageBox = require( "src/MessageBox" );
 local Fading = require( "src/Fading" );
+local ChoiceBox = require( "src/ChoiceBox" );
 
 local Scene = {}
 
@@ -10,6 +11,7 @@ Scene.new = function( runtime )
 	self:startThread( runtime );
 	self.dialogBox = MessageBox.new( self );
 	self.fading = Fading.new( self );
+	self.choiceBox = ChoiceBox.new( self );
 	return self;
 end
 
@@ -28,13 +30,26 @@ end
 
 Scene.draw = function( self )
 
+
 	self.fading:draw();
+
 	self.dialogBox:draw();
+	self.choiceBox:draw();
 end
 
 Scene.startThread = function( self, runtime )
 	local thread = coroutine.create( runtime );
 	table.insert( self.threads, thread );
+	return thread;
+end
+
+Scene.stopThread = function( self, thread )
+	for i = #self.threads, 1, -1 do
+		if thread == self.threads[i] then
+			table.remove( self.threads, i );
+			break;
+		end
+	end
 end
 
 Scene.wait = function( self, seconds )
@@ -49,22 +64,36 @@ Scene.wait = function( self, seconds )
 	end
 end
 
-Scene.waitForInput = function( self )
-	while IsMainInputDown() do
+Scene.waitForKeyPress = function( self, isDown )
+	while isDown() do
 		coroutine.yield();
 	end
-	while not IsMainInputDown() do
+	while not isDown() do
 		coroutine.yield();
 	end
 end
 
+Scene.waitForInput = function( self, key )
+	local isDown = function()
+		return love.keyboard.isDown( key )
+	end;
+	self:waitForKeyPress( isDown );
+end
+
+Scene.waitForMainInput = function( self )
+	self:waitForKeyPress( IsMainInputDown );
+end
+
 Scene.setDialogSpeed = function( self, speed )
-	self.dialogSpeed = speed;
+	self.dialogBox:setSpeed( speed );
 end
 
 Scene.showDialog = function( self, text, options )
 	self.dialogBox:showText( text, options );
+end
 
+Scene.showChoice = function( self, question, choices )
+	self.choiceBox:showChoice( question, choices );
 end
 
 Scene.fadeIn = function( self, duration )
@@ -81,7 +110,7 @@ end
 
 Scene.playSound = function( self, soundName )
 	self.currentSound = soundName;
-	
+
 	love.audio.play(self.soundName);
 end
 
@@ -95,14 +124,6 @@ Scene.playMusic = function( self, musicName )
 
 	love.audio.play(self.currentMusic);
 end
-
-
-
-
-
-
-
-
 
 
 return Scene;

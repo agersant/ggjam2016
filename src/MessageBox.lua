@@ -16,7 +16,9 @@ MessageBox.draw = function( self )
 			ox = amplitude * math.random() - amplitude/2;
 			oy = amplitude * math.random() - amplitude/2;
 		end
+
 		love.graphics.setColor(255, 255, 255, 255);
+
 		love.graphics.printf( self.currentText, 50, 200, 700, "left", 0, 1, 1, ox, oy, 0, 0 );
 	end
 end
@@ -25,7 +27,7 @@ MessageBox.showText = function( self, text, options )
 	options = options or {};
 	self.currentText = "";
 	self.wobbly = options.wobbly;
-	local textSpeed = self.dialogSpeed or 12;
+	local textSpeed = self.textSpeed or 12;
 	local startTime = love.timer.getTime();
 	local releasedInput = false;
 	while #self.currentText < #text do
@@ -39,8 +41,12 @@ MessageBox.showText = function( self, text, options )
 		self.currentText = string.sub( text, 1, numChars );
 		coroutine.yield();
 	end
-	self.scene:waitForInput();
+	self.scene:waitForMainInput();
 	self.currentText = nil;
+end
+
+MessageBox.setSpeed = function( self, speed )
+	self.textSpeed = speed;
 end
 
 return MessageBox;
