@@ -1,4 +1,5 @@
 local TestScene = require( "src/content/TestScene" );
+local TitleScene = require( "src/content/TitleScene" );
 local GoatDateScene = require( "src/content/GoatDateScene" );
 local MinnieDateScene = require( "src/content/MinnieDateScene" );
 
@@ -7,7 +8,8 @@ local MinnieDateScene = require( "src/content/MinnieDateScene" );
 
 refWidth = 1920;
 refHeight = 1080;
-startScene = GoatDateScene;
+startScene = TitleScene;
+gCurrentMusic = nil;
 gCurrentScene = nil;
 gRenderOffset = { x = 0, y = 0 };
 gRenderScale = 1;
@@ -61,6 +63,7 @@ love.load = function()
 	gAssets.BG.dinner = love.graphics.newImage( "assets/bgs/Dinner.jpg" );
 	gAssets.BG.profileGoat = love.graphics.newImage( "assets/bgs/ProfileGoat.jpg" );
 	gAssets.BG.profileMinnie = love.graphics.newImage( "assets/bgs/ProfileMinnie.jpg" );
+	gAssets.BG.titleScreen = love.graphics.newImage( "assets/bgs/TitleScreen.png" );
 
 	gAssets.FONT.dialogFont = love.graphics.newFont( "assets/font/PTS55F.ttf", 50 );
 	gAssets.FONT.introTextFont = love.graphics.newFont( "assets/font/PTS55F.ttf", 100 );

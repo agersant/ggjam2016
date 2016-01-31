@@ -187,6 +187,10 @@ Scene.setIntroText = function( self, text )
 	self.introText:setText( text );
 end
 
+Scene.setIntroTextBlinking = function( self, blinking )
+	self.introText:setBlinking( blinking );
+end
+
 Scene.introTextFadeIn = function( self, duration )
 	self.introText:fadeIn( duration );
 end
@@ -196,19 +200,19 @@ Scene.introTextFadeOut = function( self, duration )
 end
 
 Scene.playMusic = function( self, musicName )
-	if ( self.currentMusic and self.currentMusic ~= musicName ) then
-		love.audio.stop( self.currentMusic );
+	if ( gCurrentMusic and gCurrentMusic ~= musicName ) then
+		love.audio.stop( gCurrentMusic );
 	end
 
-	self.currentMusic = musicName;
-	musicName:setLooping( true );
+	gCurrentMusic = musicName;
+	gCurrentMusic:setLooping( true );
 
-	love.audio.play(self.currentMusic);
+	love.audio.play( gCurrentMusic );
 end
 
 Scene.stopMusic = function( self, musicName )
-	self.currentMusic = nil;
-	love.audio.stop( musicName );
+	love.audio.stop( gCurrentMusic );
+	gCurrentMusic = nil;
 end
 
 
