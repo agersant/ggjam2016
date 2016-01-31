@@ -67,6 +67,7 @@ love.load = function()
 
 	gAssets.FONT.dialogFont = love.graphics.newFont( "assets/font/PTS55F.ttf", 50 );
 	gAssets.FONT.introTextFont = love.graphics.newFont( "assets/font/PTS55F.ttf", 100 );
+	gAssets.CHAR.hearts = love.graphics.newImage( "assets/portraits/heart.png" );
 	gAssets.CHAR.minnie = {
 		angry0 = love.graphics.newImage( "assets/portraits/minnie/angry0.png" );
 		exit0 = love.graphics.newImage( "assets/portraits/minnie/exit0.png" );
