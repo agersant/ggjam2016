@@ -1,4 +1,7 @@
+local PointMax = 63;
+
 local Scene = require( "src/Scene" );
+local MinnieDateScene = require( "src/content/MinnieDateScene" );
 
 local GoatDateScene = {};
 
@@ -537,13 +540,197 @@ local DinnerDate = function( self )
 end
 
 
+
+local ArmAround = function( self )
+	if self:getPoints() >= 35 then
+		--self:playAnimation( "happy" );
+		self:addPoints( 4 );
+		self:showDialog( "< He bristles slightly at your touch. His body feels warm under your arm >" );
+	else
+		--self:playAnimation( "angry" );
+		self:addPoints( -2 );
+		self:showDialog( "What are you doing mortal? Do you truly think this date is going well enough for intimate contact?" );
+	end
+end
+
+
+local Handsies = function( self )
+	if self:getPoints() >= 25 then
+		--self:playAnimation( "happy" );
+		self:addPoints( 2 );
+		self:showDialog( "< He gladly takes your hand and swings it up and down. He seems like he's having a good time. >" );
+	else
+		--self:playAnimation( "angry" );
+		self:addPoints( -2 );
+		self:showDialog( "Augh! Get off of me disgusting human." );
+	end
+end
+
+
+local ThatIsLame = function( self )
+		--self:playAnimation( "idle" );
+	self:addPoints( -2 );
+	self:showDialog( "< You walk side by side to his car >" );
+end
+
+
+local LetsContinue = function( self )
+	if self:getPoints() >= 40 then
+		EvilLaugh( self, 8 );
+		self:showDialog( "You can turn off the charm, exorcist. Your job is nearly finished." );
+	else
+		--self:playAnimation( "Angry" );
+		self:showDialog( "You presume too much human! A demon lord would never bed a mortal." );
+	end
+end
+
+
+local TheSpiel = function( self )
+	--self:playAnimation( "Happy" );
+	self:addPoints( 4 );
+	self:showDialog( "Thank you too, human. I feel I have learned much of mortal ways this night." );
+	self:showDialog( "And much of myself." );
+end
+
+
+local KissyKissy = function( self )
+	--self:playAnimation( "Shock" );
+	self:showDialog( "What are you doing?", { wobbly = true } );
+	self:wait( 2 );
+	--self:playAnimation( "angry" );
+	self:showDialog( "Stop that at once!" );
+	self:addPoints( -2 );
+end
+
+
+local PlayTransformation = function ( self )
+	self:playMusic( gAssets.MUSIC.narration );
+	--self:playAnimation( idle );
+	self:wait( 2 );
+	--self:playAnimation( happy );
+	self:wait( 1.5 ); 
+	--self:playAnimation( idle );
+	self:wait( 1.3 );
+	--self:playAnimation( happy );
+	self:wait( 1 ); 
+	--self:playAnimation( idle );
+	self:wait( 0.8 );
+	--self:playAnimation( happy );
+	self:wait( 0.5 ); 
+	--self:playAnimation( idle );
+	self:wait( 0.3 );
+	--self:playAnimation( happy );
+	self:wait( 0.2 ); 
+	--self:playAnimation( idle );
+	self:wait( 0.1 );
+	--self:playAnimation( happy );
+	self:wait( 0.05 ); 
+	--self:playAnimation( "idle" );
+	self:wait( 0.02 );
+	--self:playAnimation( "happy" );
+	self:wait( 0.01 ); 
+	--self:playAnimation( "transform" );
+	self:fadeOut( 8 );
+
+	self:playNarration( "WELL DONE EXORCIST!" );
+	self:playNarration( "YOU HAVE FREED A SOUL FROM ETERNAL IMPRISONMENT" );
+	self:setDialogSpeed( 6 );
+	self:playNarration( "GOAT JOB", { wobbly = true } );
+	self:playNarration( "I GUESS THAT WAS A BIT OF A STRETCH" );
+	self:playNarration( "WHAT DO YOU WANT FROM ME, I'M A DISEMBODIED VOICE" );
+	self:setDialogSpeed( 6 );
+	self:playNarration( "JERK", { wobbly = true } );
+end
+
+
+local ParkingLotDate = function( self )
+	self:playMusic( gAssets.MUSIC.parkingLot );
+	self:setBackground( gAssets.BG.parking );
+	self:fadeIn( 3 );
+	self:showDialog( "Come, walk to my vehicle." );	
+	self:showChoice( "Time for intimacy.", { { "Wrap your arm around his warm fur.", ArmAround },
+		{ "Grab his hoof.", Handsies },
+		{ "Walk separately.", ThatIsLame } } );
+	self:wait( 2 );
+	if self:getPoints() >= 35 then
+		--self:playAnimation( "idle" );
+		self:showDialog( "Human, spending time with you has been..." );
+		self:showDialog( "Torturous", { wobbly = true } );
+		self:showDialog( "Horribly painful", { wobbly = true } );
+		self:wait( 1 );
+		--self:playAnimation( "happy" );
+		self:showDialog( "...and maybe even a little bit fun." );
+	elseif self:getPoints() >= 15 then
+		--self:playAnimation( "idle" );
+		self:showDialog( "Human, this date has been moderately bearable." );
+		self:showDialog( "I was expecting boredom." );
+	else
+		--self:playAnimation( "idle" );
+		self:showDialog( "Human, I think we should get this business over with." );
+	end
+	self:showDialog( "< He's looking at you, as if he's expecting something >" );
+	self:showChoice( "Uhhhh uhhhhhhhhh....", { { "The date doesn't need to stop here. Wink Wink.", LetsContinue },
+			{ "I thank you for spending time with me Dae Son of Ez...", TheSpiel }, 
+			{ "Those lips are irresistible.", KissyKissy } } );
+
+	if self:getPoints() == PointMax then
+		self:showDialog( "I know your true purpose, mortal.\n\nYou are an exorcist.")
+		self:showDialog( "Despite your profession." );
+		self:showDialog( "Despite your disgusting human body." );
+		self:showDialog( "Despite your imminent death." );
+		self:setDialogSpeed( 6 ); 
+		self:showDialog( "I feel as though I love you.", { ignoreInput = true, wobbly = true } );
+		self:wait( 1 );
+		self:setDialogSpeed();
+		self:showDialog( "You have given me many moments of true happiness." );
+		self:showDialog( "But this moment is the happiest of all." );
+		self:showDialog( "Thank you for freeing me." );
+		self:setDialogSpeed( 6 );
+		self:showDialog( "EXORCIST", { ignoreInput = true, wobbly = true } );
+		PlayTransformation( self );
+	elseif self:getPoints() >= 25 then
+		self:showDialog( "I've figured out your true purpose, mortal.\n\nYou are an exorcist." );
+		self:showDialog( "Our night has had its rough patches, but I think you have granted me true happiness." );
+		self:showDialog( "It is time for me to go." );
+		PlayTransformation( self );
+	else
+		self:kill();
+	end
+end
+
+
+local KillFunction = function( self )
+	self:showDialog( "That's enough, I'm leaving, human. You have failed to woo me." );
+	self:showDialog( "This has not been fun, I hope we do not see each other again." );
+	self:setDialogSpeed( 4 );
+	self:showDialog( "GOODBYE", { wobbly = true, ignoreInput } );
+	self:fadeOut( 3 );
+	self:setBackground( gAssets.BG.black );
+	self:fadeIn( 1 );
+	self:setDialogSpeed( 6 );
+	self:showNarration( "WELL, THAT WAS AWKWARD" );
+	self:showNarration( "IT WENT REALLY BAAAAH-DLY" );
+	self:showNarration( "YOU REALLY GOT HIS GOAT" );
+	self:showNarration( "I'M NOT EVEN KID-DING" );
+	self:showNarration( "DON'T GET HORN-ERY" );
+	self:setDialogSpeed( 6 );
+	self:showNarration( "I GUESS YOU'VE BOUGHT THE FARM", { ignoreInput = true, wobbly = true } );
+	self:setDialogSpeed();
+	self:showNarration( "ANYWAYS..." );
+	self:showNarration( "I HOPE IT GOES BETTER NEXT TIME" );
+	ChangeScene( MinnieDateScene.new() );
+end
+
+
 local run = function( self )
-	--PlayNarration( self );
-	--self:stopMusic( gAssets.MUSIC.narration );
-	--PresentGoatDatingProfile( self );
-	--TheaterDate( self );
+	self.kill = KillFunction;
+	PlayNarration( self );
+	self:stopMusic( gAssets.MUSIC.narration );
+	PresentGoatDatingProfile( self );
+	TheaterDate( self );
 	self.movieAnswer = 0;
 	DinnerDate( self );
+	ParkingLotDate( self );	
 end
 
 

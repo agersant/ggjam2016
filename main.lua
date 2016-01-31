@@ -78,6 +78,7 @@ love.load = function()
 	gAssets.SOUND.mySound = love.audio.newSource("assets/sounds/Jump.wav");
 	gAssets.MUSIC.mySound = love.audio.newSource("assets/music/mySound.ogg");
 	gAssets.MUSIC.narration = love.audio.newSource( "assets/music/Narration.mp3" );
+	gAssets.MUSIC.parkingLot = love.audio.newSource( "assets/music/ParkingLot.mp3" );
 end
 
 love.update = function( dt )

@@ -16,7 +16,7 @@ Scene.new = function( runtime )
 	self.fading = Fading.new( self );
 	self.introText = IntroText.new( self );
 	self.choiceBox = ChoiceBox.new( self );
-	self.points = 0;
+	self.points = 10;
 	self:startThread( runtime );
 	return self;
 end
@@ -173,7 +173,7 @@ end
 Scene.addPoints = function( self, pointsToAdd )
 	self.points = self.points + pointsToAdd;
 	if self.points < 0 then
-		--self.kill;
+		self:kill();
 	elseif pointsToAdd >= 4 then
 		self:playSuccessFX();
 	end
