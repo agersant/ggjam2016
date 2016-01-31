@@ -1,5 +1,6 @@
 local MessageBox = require( "src/MessageBox" );
 local ChoiceBox = require( "src/ChoiceBox" );
+local Portrait = require( "src/Portrait" );
 
 local Scene = {}
 
@@ -8,6 +9,7 @@ Scene.new = function( runtime )
 	SetClass( self, Scene );
 	self.threads = {};
 	self:startThread( runtime );
+	self.portrait = Portrait.new( self );
 	self.dialogBox = MessageBox.new( self );
 	self.choiceBox = ChoiceBox.new( self );
 	return self;
@@ -27,6 +29,7 @@ Scene.update = function( self )
 end
 
 Scene.draw = function( self )
+	self.portrait:draw();
 	self.dialogBox:draw();
 	self.choiceBox:draw();
 end
