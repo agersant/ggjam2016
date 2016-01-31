@@ -9,6 +9,7 @@ Minnie.new = function( scene, portrait )
 end
 
 Minnie.playAnimation = function( self, animationName )
+	self.portrait:setOffset( 780, 0 );
 	if animationName == "angry" then
 		return self:playAngry();
 	elseif animationName == "exit" then

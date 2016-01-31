@@ -10,6 +10,7 @@ end
 
 Portrait.reset = function( self )
 	self.image = nil;
+	self.offset = { x = 0, y = 0, };
 	self.wobbleAmount = 0;
 end
 
@@ -21,6 +22,7 @@ Portrait.draw = function( self )
 			local yAmount = self.wobbleAmount * math.random() - self.wobbleAmount / 2;
 			love.graphics.translate( xAmount, yAmount );
 		end
+		love.graphics.translate( self.offset.x, self.offset.y );
 		love.graphics.setColor( 255, 255, 255, 255 );
 		love.graphics.draw( self.image );
 		love.graphics.pop();
@@ -66,6 +68,11 @@ end
 
 Portrait.setWobble = function( self, amplitude )
 	self.wobbleAmount = amplitude;
+end
+
+Portrait.setOffset = function( self, x, y )
+	self.offset.x = x;
+	self.offset.y = y;
 end
 
 return Portrait;
