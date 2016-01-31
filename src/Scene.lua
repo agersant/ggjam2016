@@ -3,6 +3,7 @@ local Fading = require( "src/Fading" );
 local ChoiceBox = require( "src/ChoiceBox" );
 local Portrait = require( "src/Portrait" );
 local IntroText = require( "src/IntroText" );
+local ReportCard = require( "src/ReportCard" );
 
 local Scene = {}
 
@@ -15,6 +16,7 @@ Scene.new = function( runtime )
 	self.narrationBox = MessageBox.new( self, { showBox = false, y = 400, textAlign = "center" } );
 	self.fading = Fading.new( self );
 	self.introText = IntroText.new( self );
+	self.reportCard = ReportCard.new( self );
 	self.choiceBox = ChoiceBox.new( self );
 	self.points = 10;
 	self:startThread( runtime );
@@ -50,6 +52,7 @@ Scene.draw = function( self )
 	self.dialogBox:draw();
 	self.choiceBox:draw();
 	self.fading:draw();
+	self.reportCard:draw();
 end
 
 Scene.startThread = function( self, runtime )
@@ -197,6 +200,10 @@ end
 
 Scene.introTextFadeOut = function( self, duration )
 	self.introText:fadeOut( duration );
+end
+
+Scene.showReport = function( self, success, score )
+	self.reportCard:showReport( success, score );
 end
 
 Scene.playMusic = function( self, musicName )

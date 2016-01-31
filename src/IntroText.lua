@@ -63,15 +63,6 @@ IntroText.setBlinking = function( self, blinking )
 
 		coroutine.yield();
 	end
-	
-	
-	
-	
-
-	
-	
-	
-	
 end
 
 IntroText.fadeIn = function( self, duration )
