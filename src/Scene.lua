@@ -170,6 +170,8 @@ Scene.addPoints = function( self, pointsToAdd )
 	self.points = self.points + pointsToAdd;
 	if self.points < 0 then
 		--self.kill;
+	elseif pointsToAdd >= 4 then
+		self:playSuccessFX();
 	end
 end
 
