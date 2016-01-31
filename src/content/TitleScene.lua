@@ -5,11 +5,16 @@ local TitleScene = {};
 
 
 local PlayNarration = function( self )
---	self:playMusic( gAssets.MUSIC.narration );
+
+	self:fadeOut( 0.1 );
+	self:setBackground( gAssets.BG.logo );
+	self:fadeIn( 1 );
+	self:wait( 1 );
+	self:fadeOut( 1 );
+	
 	self:setBackground( gAssets.BG.titleScreen );
-
+	self:fadeIn( 1 );
 	self:setIntroText( "Press Space to Start" );
-
 	local introSceneBlink = self:startThread( function( self ) self.introText:setBlinking( true ); end );
 
 	self:waitForMainInput();

@@ -63,6 +63,7 @@ love.load = function()
 	gAssets.BG.dinner = love.graphics.newImage( "assets/bgs/Dinner.jpg" );
 	gAssets.BG.profileGoat = love.graphics.newImage( "assets/bgs/ProfileGoat.jpg" );
 	gAssets.BG.profileMinnie = love.graphics.newImage( "assets/bgs/ProfileMinnie.jpg" );
+	gAssets.BG.logo = love.graphics.newImage( "assets/bgs/logo.jpg" );
 	gAssets.BG.titleScreen = love.graphics.newImage( "assets/bgs/TitleScreen.jpg" );
 	gAssets.BG.reportCard = love.graphics.newImage( "assets/bgs/report.png" );
 
