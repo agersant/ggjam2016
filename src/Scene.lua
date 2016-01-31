@@ -1,4 +1,5 @@
 local MessageBox = require( "src/MessageBox" );
+local Fading = require( "src/Fading" );
 
 local Scene = {}
 
@@ -8,6 +9,7 @@ Scene.new = function( runtime )
 	self.threads = {};
 	self:startThread( runtime );
 	self.dialogBox = MessageBox.new( self );
+	self.fading = Fading.new( self );
 	return self;
 end
 
@@ -26,8 +28,7 @@ end
 
 Scene.draw = function( self )
 
-
-
+	self.fading:draw();
 	self.dialogBox:draw();
 end
 
@@ -66,12 +67,22 @@ Scene.showDialog = function( self, text, options )
 
 end
 
+Scene.fadeIn = function( self, duration )
+	self.fading:fadeIn( duration );
+end
+
+Scene.fadeOut = function( self, duration )
+	self.fading:fadeOut( duration );
+end
+
 Scene.setBackground = function( self, imageName )
 	self.currentBackground = imageName;
 end
 
 Scene.playSound = function( self, soundName )
 	self.currentSound = soundName;
+	
+	love.audio.play(self.soundName);
 end
 
 Scene.playMusic = function( self, musicName )
@@ -80,19 +91,13 @@ Scene.playMusic = function( self, musicName )
 	end
 
 	self.currentMusic = musicName;
---	musicName:setLooping( true );
+	musicName:setLooping( true );
 
 	love.audio.play(self.currentMusic);
 end
 
-Scene.fadeIn = function( duration )
-	A = 0;
-end
 
 
-Scene.fadeOut = function( duration )
-	A = 255;
-end
 
 
 

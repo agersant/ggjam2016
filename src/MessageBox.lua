@@ -16,6 +16,7 @@ MessageBox.draw = function( self )
 			ox = amplitude * math.random() - amplitude/2;
 			oy = amplitude * math.random() - amplitude/2;
 		end
+		love.graphics.setColor(255, 255, 255, 255);
 		love.graphics.printf( self.currentText, 50, 200, 700, "left", 0, 1, 1, ox, oy, 0, 0 );
 	end
 end

@@ -37,10 +37,8 @@ end
 
 love.load = function()
 	gAssets.BG.monster = love.graphics.newImage("assets/bgs/monster.jpg");
-	gAssets.SOUND.mySound = love.audio.newSource("assets/sounds/mySound.ogg");
-	gAssets.MUSIC.mySound = love.audio.newSource("assets/music/Jump.wav");
-
-	A = 255;
+	gAssets.SOUND.mySound = love.audio.newSource("assets/sounds/Jump.wav");
+	gAssets.MUSIC.mySound = love.audio.newSource("assets/music/mySound.ogg");
 end
 
 
