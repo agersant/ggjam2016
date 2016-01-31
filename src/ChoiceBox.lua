@@ -23,6 +23,8 @@ ChoiceBox.draw = function( self )
 	local paddingYQuestion = 4;
 	local paddingYAnswers = 15;
 
+	love.graphics.setFont( gAssets.FONT.dialogFont );
+	
 	love.graphics.setColor( 28, 28, 28, 255 );
 	love.graphics.rectangle( "fill", self.x, 1080 - (40 + 70 + (98 + 18) * #self.choices), self.width, 80 );
 	
