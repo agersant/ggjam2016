@@ -36,7 +36,7 @@ MessageBox.draw = function( self )
 		Gradient.drawinrect( self.boxGradient, self.x, self.y, self.width, self.height );
 		
 		-- Borders
-		local thickness = 3;
+		local thickness = 6;
 		love.graphics.setColor( 255, 255, 255, 255 );
 		love.graphics.rectangle( "fill", self.x, self.y, thickness, self.height );
 		love.graphics.rectangle( "fill", self.x + self.width - thickness, self.y, thickness, self.height );
