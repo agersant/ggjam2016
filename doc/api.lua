@@ -1,7 +1,7 @@
 function DateVampire( scene )
 
 	-- TODO
-	scene:setBackground( "imageName" );
+	scene:setBackground( gAssets.BG.mockup );
 	scene:fadeOut( seconds );
 	scene:fadeIn( seconds );
 
@@ -9,8 +9,8 @@ function DateVampire( scene )
 	scene:setCharacterPose( "characterName" );
 	scene:waitForCharacterAnimation();
 	
-	scene:playSound();
-	scene:playMusic();
+	scene:playSound( gAssets.SOUND.mySound );
+	scene:playMusic( gAssets.MUSIC.mySound );
 	
 	-- DONE
 	scene:wait( seconds );
