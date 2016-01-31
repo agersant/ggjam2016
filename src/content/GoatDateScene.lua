@@ -8,7 +8,7 @@ local PlayNarration = function( self )
 	self:setBackground( gAssets.BG.black );
 	self:setDialogSpeed( 6 );
 	self:showNarration( "DEMONS", { wobbly = true } );
-	self:setDialogSpeed( 28 );
+	self:setDialogSpeed();
 	self:showNarration( "NO LONGER MERE MYTH, THEY NOW WALK AMONG US" );
 	self:showNarration( "THEY SERVE COFFEE, THEY DRIVE BUSES, THEY WRITE CODE" );
 	self:wait( 1 );
@@ -29,7 +29,7 @@ end
 
 
 local PresentGoatDatingProfile = function( self )
-	self:setDialogSpeed( 28 );
+	self:setDialogSpeed();
 	self:showDialog( "All demons are lonely creatures.\n\nIn our modern day world, the best way for a demon to find a companion is with FivePointedLove.com" );
 	self:showDialog( "Here is the profile of the first demon you must court.\n\nPay close attention to everything they include on their profile, any one piece of information could save your life." );
 	--self:showProfile( gAssets.PROFILES.goat );
@@ -72,7 +72,7 @@ local SayTheSpiel = function( self )
 	self:showDialog( "Capable Photographer.", { ignoreInput = true } );
 	self:setDialogSpeed( 16 );
 	self:showDialog( "Bringer of Despair.", { wobbly = true } );
-	self:setDialogSpeed( 28 );
+	self:setDialogSpeed();
 end
 
 
@@ -154,7 +154,7 @@ local TheaterDate = function( self )
 	self:introTextFadeIn( 5 );
 	self:introTextFadeOut( 5 );
 
-	self:setDialogSpeed( 28 );
+	self:setDialogSpeed();
 	self:showDialog( "Mortal! I am the one you are waiting for! My name is Dae'mwe S'haur." );
 	SayTheSpiel( self );
 	self:showChoice( "< It looks like he's waiting for a response >", 
@@ -193,6 +193,7 @@ local TheaterDate = function( self )
 		{ "The back row. I can see my house from there.", BackRow } } );
 
 	self:showDialog( "This is not the time to tarry! Let us make haste to our seats. \n\nCome with me human!" );
+	self:fadeOut( 3 );
 end
 
 
@@ -235,10 +236,11 @@ end
 local NotMakingFriends = function( self )
 	--self:playCharacterAnimation( "angry" );
 	self:addPoints( -4 );
-	self:showDialog( "YOU WOULD ORDER THE KING OF THE SEVENTH CIRCLE OF HELL TREE LEAVES????", { wobbly = true } );
+	self:showDialog( "YOU WOULD ORDER THE KING OF THE SEVENTH CIRCLE OF HELL TREE LEAVES?", { wobbly = true } );
 	self:wait( 2 );
 	self:showDialog( "I am S'haur!" );
 	SayTheSpiel( self );
+	self:showDialog( "I'm not a friggin' vegetarian." )
 end
 
 
@@ -255,7 +257,7 @@ end
 local TakeTime = function ( self )
 	--self:playCharacterAnimation( "idle" );
 	self:showDialog( "< THEN ARRIVES WAITER >" );
-	self:showDialog( "I will have the \"All you Can Meat special.\" with a side of meat." );
+	self:showDialog( "I'll have the \"All you Can Meat special.\" with a side of meat." );
 end
 
 
@@ -289,14 +291,14 @@ local TheDigitalFuture = function( self )
 	--self:playCharacterAnimation( "idle" );
 	self:showDialog( "Do you not think photos lose their authenticity on digital?" );
 	--self:playCharacterAnimation( "sad" );
-	self:showDialog( "The future is grim for photography" );
+	self:showDialog( "The future is grim for photography." );
 	self:addPoints( -2 );
 end
 
 
 local FilmTime = function( self )
-	self:showDialog( "I like to enfuse my shots with an aesthetically pleasing grain. The grain adds an extra dimension to a photo. It brings out a certain charm and personality which is otherwise lacking." );
-	self:showDialog( "It is also very important to shoot in natural light. All the fake Hollywood trickery you see nowadays just ruins the purity of a shot." );
+	self:showDialog( "I like to enfuse my shots with an aesthetically pleasing grain. The grain adds a tasteful extra dimension to a photo. It evokes a certain charm and personality which is otherwise lacking." );
+	self:showDialog( "It's also very important to shoot in natural light. All the fake Hollywood trickery you see nowadays ruins the purity of a shot." );
 	self:showChoice( "Do you have a favorite medium for picture taking?", { { "I prefer film.", GottaGoFilm },
 		{ "Digitize me, baby.", TheDigitalFuture } } );
 end
@@ -317,7 +319,148 @@ local HobbyMaybe = function( self )
 end
 
 
+local DevilSpiel = function( self )
+	--self:playCharacterAnimation( "happy" );
+	self:showDialog( "You've heard of him, yes?" );
+	self:setDialogSpeed( 16 );
+	self:showDialog( "He is Lucifer.", { ignoreInput = true }  );
+	self:setDialogSpeed( 19 );
+	self:showDialog( "Prince of Darkness.", { ignoreInput = true }  );
+	self:setDialogSpeed( 23 );
+	self:showDialog( "Gatekeeper of the Great Below.", { ignoreInput = true } );
+	self:setDialogSpeed( 29 );
+	self:showDialog( "Father of Lies.", { ignoreInput = true } );
+	self:setDialogSpeed( 33 );
+	self:showDialog( "Lord of the Underworld.", { ignoreInput = true } );
+	self:setDialogSpeed( 37 );
+	self:showDialog( "Inspiration of \"The Number of the Beast\".", { ignoreInput = true } );
+	self:setDialogSpeed( 40 );
+	self:showDialog( "Master Herbalist.", { ignoreInput = true } );
+	self:setDialogSpeed( 42 );
+	self:showDialog( "Source of all evil. That includes demons! He made my father's father, who made my father, who made me!", { ignoreInput = true } );
+	self:setDialogSpeed( 16 );
+	self:showDialog( "The Devil.", { wobbly = true } );
+	self:setDialogSpeed( 28 );
+end
+
+
+local CloseFather = function( self )
+	--self:playCharacterAnimation( "shock" );
+	self:addPoints( 4 );
+	self:showDialog( "You must tell me how I can achieve something similar with the allfather!" );
+	DevilSpiel( self );
+end
+
+
+local LikeDad = function( self )
+	--self:playCharacterAnimation( "idle" );
+	self:addPoints( 1 );
+	self:showDialog( "I wish I could get along well with the allfather." );
+	DevilSpiel( self );
+end
+
+
+local NoDadPlease = function( self )
+	--self:playCharacterAnimation( "angry" );
+	self:addPoints( -2 );
+	self:showDialog( "You squander your potential!" );
+	self:showDialog( "Mortals are easy to get along with. I must attempt to create a relationship with the allfather!" );
+	DevilSpiel( self );
+end
+
+
+local GoodEnough = function( self )
+	--self:playCharacterAnimation( "idle" );
+	self:addPoints( 1 );
+	self:showDialog( "I thank you for your kind words, but I do not need to be patronized. I am the King of the Seventh Circle of Hell." );
+end
+
+
+local HappyAndSafe = function( self )
+	self:wait( 2 );
+	--self:playCharacterAnimation( "idle" );
+	self:wait( 0.5 );
+	--self:playCharacterAnimation( "sad" );
+	self:wait( 0.5 );
+	--self:playCharacterAnimation( "idle" );
+	self:wait( 0.5 );
+	--self:playCharacterAnimation( "sad" );
+	self:wait( 0.5 );
+	
+	self:showDialog( "\n\nHappy and safe?", { wobbly = true } );
+	self:wait( 0.5 );
+	self:showDialog( "So you're saying I'm no demon at all. Lucifer will never notice me." );
+	self:addPoints( -3 );
+end
+
+
+local Compromise = function( self )
+	--self:playCharacterAnimation( "idle" );
+	self:showDialog( "You might be right. Thank you for listening to an old goat rant." );
+end
+
+
+local EvilLaugh = function( self, pointsToAdd )
+	self:wait( 2 );
+	--self:playCharacterAnimation( "idle" );
+	self:wait( 0.5 );
+	self:addPoints( pointsToAdd );
+	--self:playCharacterAnimation( "happy" );
+	self:wait( 0.5 );
+	--self:playCharacterAnimation( "idle" );
+	self:wait( 0.5 );
+	--self:playCharacterAnimation( "happy" );
+	self:wait( 0.5 );
+
+	self:setDialogSpeed( 8 );
+	self:showDialog( "GWA HA HA HA HA HA", { wobbly = true, ignoreInput = true } );
+	self:setDialogSpeed();
+end
+
+
+local BestLaidPlans = function( self )
+	EvilLaugh( self, 8 );
+	self:showDialog( "You're no mere mortal. I sense a demonic presence in you." );
+	self:showDialog( "AND I LOVE IT!" );
+	self:showDialog( "This plan of yours will surely work. I shall make preparations immediately after our date!" );
+end
+
+
+local YouTortureMe = function( self )
+	EvilLaugh( self, 4 );
+	self:showDialog( "Then I am the truest demon! To ellicit such a reaction from you is a great honor." );
+	self:showDialog( "If I can make you feel that way, then I can surely make Lucifer notice me instead of cousin Cha'zir!" );
+	--self:playCharacterAnimation( "angry" );
+	self:showDialog( "He has always liked Cha'zir better." );
+	self:showChoice( "< He's seething >", { { "Surely there's room in the heart of a god for more than one demon.", Compromise },
+		{ "Okay, here's the plan. Let's murder your cousin, dump the body and you can slip into his position at Lucifer's side.", BestLaidPlans } } );
+end
+
+
+local BookIt = function( self )
+	--self:playCharacterAnimation( "happy" );
+	self:addPoints( 1 );
+	self:showDialog( "That is just what I was thinking. Let's explode this stand of popsicles." );
+end
+
+
+local IWillPay = function( self )
+	--self:playCharacterAnimation( "happy" );
+	self:addPoints( 6 );
+	self:showDialog( "I see money is not a problem for you. Very interesting." );
+end
+
+
+local LetHimPay = function( self )
+	--self:playCharacterAnimation( "angry" );
+	self:addPoints( -2 );
+	self:showDialog( "Your weakness disappoints me. I will pay your bill if I must." );
+	self:showDialog( "< Dae will remember that >" );
+end
+
+
 local DinnerDate = function( self )
+	self:fadeIn( 3 );
 	self:setBackground( gAssets.BG.dinner );
 
 	if self.movieAnswer == 0 then
@@ -343,13 +486,13 @@ local DinnerDate = function( self )
 		self:showDialog( "An entire movie about laughing children, and not one was in pain!" );
 		self:addPoints( -2 );
 		--self:playCharacterAnimation( "idle" );
-		self:showDialog( "How would you correct the mistakes of those filmmaking ignorami?" );
+		self:showDialog( "How would you correct the mistakes of those filmmaking fools?" );
 		self:showChoice( "< He's deep in thought >", { { "Slowly lower the children into a pit of lava.", LavaPit },
 			{ "Drain the blood of the children into a bowl, then bathe in it.", BowlBlood },
 			{ "Place the children into iron maidens.", IronMaiden } } );
 	end
 
-	self:showDialog( "Now, what kind of base nourishment do they have at this establishment?" );
+	self:showDialog( "What kind of base nourishment do they have at this establishment?" );
 	self:showChoice( "< He's sifting through the menu >", { { "Order his food for him.", StealOrder }, 
 		{ "Let him take his time.", TakeTime } } );
 
@@ -362,8 +505,35 @@ local DinnerDate = function( self )
 
 	--self:playCharacterAnimation( "idle" );
 	self:showDialog( "We speak too much of Dae. I must hear more of you." );
-	self:showDialog( "What is your family like?" );
+	self:showDialog( "Do you have a good relationship with your father?" );
+	self:showChoice( "< He's looking at you, but also not?", { { "My father and I are extremely close. He's actually waiting in my car right now.", CloseFather }, 
+		{ "I like my dad. He's a pretty cool guy.", LikeDad },
+		{ "I could take him or leave him.", NoDadPlease } } );
 
+	--self:playCharacterAnimation( "sad" );
+	self:showDialog( "How can I possibly be a good enough demon for Beelzebub himself?" );
+	self:setDialogSpeed( 12 );
+	self:showDialog( "\nDo you think I'm good enough?", { wobbly = true, ignoreInput = true } );
+	self:setDialogSpeed();
+	self:showChoice( "Uh oh", { { "You are good enough.", GoodEnough }, 
+		{ "You make me feel happy and safe.", HappyAndSafe },
+		{ "Being with you is torturous.", YouTortureMe } } );
+
+	self:showDialog( "< The waiter gingerly places the check on the table >" );
+	self:showDialog( "Our dinner is over already? Time moves quickly when a demon fraternizes with a mortal." );
+
+	if self.noMoMoney then
+		self:showChoice( "You could pay for the bill, if you didn't spend all your money on concessions.", 
+			{ { "I have no money, let's run!", BookIt },
+			{ "I have no money, can you cover me?", LetHimPay } } );
+	else
+		self:showChoice( "It's do or die.", 
+			{ { "Offer to pay for dinner.", IWillPay },
+			{ "Wouldn't it be more fun if we just ran?", BookIt },
+			{ "I have no money, can you cover me?", LetHimPay } } );
+	end
+
+	self:fadeOut( 3 );
 end
 
 

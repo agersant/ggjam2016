@@ -7,7 +7,7 @@ local MinnieDateScene = require( "src/content/MinnieDateScene" );
 
 refWidth = 1920;
 refHeight = 1080;
-startScene = MinnieDateScene;
+startScene = GoatDateScene;
 gCurrentScene = nil;
 gRenderOffset = { x = 0, y = 0 };
 gRenderScale = 1;
