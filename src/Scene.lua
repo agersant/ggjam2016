@@ -210,6 +210,9 @@ Scene.showReport = function( self, success, score )
 end
 
 Scene.playMusic = function( self, musicName )
+	if not musicName then
+		return;
+	end
 	if ( gCurrentMusic and gCurrentMusic ~= musicName ) then
 		love.audio.stop( gCurrentMusic );
 	end
