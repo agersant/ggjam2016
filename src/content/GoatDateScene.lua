@@ -472,6 +472,7 @@ end
 
 
 local DinnerDate = function( self )
+	self:playMusic( gAssets.MUSIC.dinner );
 	self:playCharacterAnimation( "idle" );
 	self:setBackground( gAssets.BG.dinner );
 	self:fadeIn( 3 );
