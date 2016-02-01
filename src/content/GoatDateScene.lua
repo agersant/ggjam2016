@@ -643,6 +643,7 @@ local PlayTransformation = function ( self )
 	self:wait( 0.01 ); 
 	self:playCharacterAnimation( "exit" );
 	self:fadeOut( 8 );
+	self:setCharacter();
 
 	self:showNarration( "WELL DONE EXORCIST!" );
 	self:showNarration( "YOU HAVE FREED A SOUL FROM ETERNAL IMPRISONMENT" );
@@ -725,6 +726,7 @@ local KillFunction = function( self )
 	self:setDialogSpeed( 4 );
 	self:showDialog( "GOODBYE", { wobbly = true, ignoreInput } );
 	self:fadeOut( 3 );
+	self:setCharacter();
 	self:setBackground( gAssets.BG.black );
 	self:fadeIn( 1 );
 	self:setDialogSpeed( 6 );
@@ -738,7 +740,7 @@ local KillFunction = function( self )
 	self:setDialogSpeed();
 	self:showNarration( "ANYWAYS..." );
 	self:showNarration( "I HOPE IT GOES BETTER NEXT TIME" );
-	self:showReport( false, self:getPoints() / PointMax )
+	self:showReport( false, self:getPoints() / PointMax );
 	self:waitForMainInput();
 	ChangeScene( MinnieDateScene.new() );
 end
