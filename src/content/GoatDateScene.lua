@@ -272,7 +272,7 @@ end
 local TakeTime = function ( self )
 	self:playCharacterAnimation( "idle" );
 	self:showDialog( "< THEN ARRIVES WAITER >" );
-	self:showDialog( "I'll have the \"All you Can Meat special.\" with a side of meat." );
+	self:showDialog( "I'll have the \"All you Can Meat Special.\" with a side of meat." );
 end
 
 
@@ -446,7 +446,7 @@ local YouTortureMe = function( self )
 	self:playCharacterAnimation( "mad" );
 	self:showDialog( "He has always liked Cha'zir better." );
 	self:showChoice( "< He's seething >", { { "Surely there's room in the heart of a god for more than one demon.", Compromise },
-		{ "Okay, here's the plan. Let's murder your cousin, dump the body and you can slip into his position at Lucifer's side.", BestLaidPlans } } );
+		{ "Let's kill your cousin, dump the body and you can take his place.", BestLaidPlans } } );
 end
 
 
@@ -521,7 +521,7 @@ local DinnerDate = function( self )
 	self:playCharacterAnimation( "idle" );
 	self:showDialog( "We speak too much of Dae. I must hear more of you." );
 	self:showDialog( "Do you have a good relationship with your father?" );
-	self:showChoice( "< He's looking at you, but also not?", { { "My father and I are extremely close. He's actually waiting in my car right now.", CloseFather }, 
+	self:showChoice( "< He's looking at you, but also not?", { { "We're very close. He's actually waiting in my car right now.", CloseFather }, 
 		{ "I like my dad. He's a pretty cool guy.", LikeDad },
 		{ "I could take him or leave him.", NoDadPlease } } );
 
@@ -644,6 +644,8 @@ local PlayTransformation = function ( self )
 	self:playCharacterAnimation( "exit" );
 	self:fadeOut( 8 );
 	self:setCharacter();
+	self:setBackground( gAssets.BG.black );
+	self:fadeIn( 1 );
 
 	self:showNarration( "WELL DONE EXORCIST!" );
 	self:showNarration( "YOU HAVE FREED A SOUL FROM ETERNAL IMPRISONMENT" );
@@ -749,11 +751,13 @@ end
 local run = function( self )
 	self.kill = KillFunction;
 	self:setCharacter( Goat );
-	PlayNarration( self );
-	self:stopMusic( gAssets.MUSIC.narration );
-	PresentGoatDatingProfile( self );
-	TheaterDate( self );
+	--PlayNarration( self );
+	--self:stopMusic( gAssets.MUSIC.narration );
+	--PresentGoatDatingProfile( self );
+	--TheaterDate( self );
+	self.movieChoice = 0;
 	DinnerDate( self );
+	self:addPoints( 10000 );
 	ParkingLotDate( self );
 end
 
