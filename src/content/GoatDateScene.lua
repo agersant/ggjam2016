@@ -756,7 +756,6 @@ local run = function( self )
 	PresentGoatDatingProfile( self );
 	TheaterDate( self );
 	DinnerDate( self );
-	self:addPoints( 10000 );
 	ParkingLotDate( self );
 end
 
