@@ -137,7 +137,6 @@ local BuyTheManFood = function( self )
 	self.noMoMoney = true;
 	self:showDialog( "By the wing's of Abaddon. You must possess a fortune!", { wobbly = true } );
 	self:addPoints( 2 );
-	self:playCharacterAnimation( "happy" );
 end
 
 
@@ -171,7 +170,6 @@ end
 local TheaterDate = function( self )
 	self:playMusic( gAssets.MUSIC.theater );
 	self:setBackground( gAssets.BG.theater );
-	--self:playMusic( gAssets.MUSIC.theaterLobby );
 	self:playCharacterAnimation( "idle" );
 	self:fadeIn( 3 );
 	self:setIntroText( "King of the Seventh Circle of Hell:\nDae’mwe S’haur" );
@@ -184,12 +182,14 @@ local TheaterDate = function( self )
 	self:showChoice( "< It looks like he's waiting for a response >", 
 		{ { "Praise be to Dae'mwe! The Undertaker, Chief of...", PraiseHisTitles }, 
 		{ "Please, tell me more about yourself.", AskAboutHim } } );
+	self:playCharacterAnimation( "idle" );
 	self:showDialog( "I have spoken enough! Tell me about yourself." );
 
 	self:showChoice( "< He's eyeing you sternly >", { { "I'm an exorcist. I'm here to perform an exorcism.", TellTheTruth },
 		{ "I'm excited to be able to spend time with a man of your stature.", Complimentary },
 		{ "I've been dreading this date for weeks.", Dread } } );
 
+	self:playCharacterAnimation( "idle" );
 	self:showDialog( "So....." );
 	self:showDialog( "The picture selection is quite varied. I haven't been to a multiplex since I was a kid." );
 	self:showDialog( "My nanny used to take me to see horror films.\nWe would laugh and laugh until they kicked us out." );
@@ -213,17 +213,20 @@ local TheaterDate = function( self )
 		{ "Spend all your money on a drink.", BuyTheManFood },
 		{ "Ignore the concession stand.", TheWiseChoice } } );
 
+	self:playCharacterAnimation( "idle" );
 	self:showDialog( "Where should we sit?" );
 	self:showChoice( "< He's getting anxious >", { { "The front row, I have bad eyesight.", FrontRow },
 		{ "The middle row. Best seats in the house.", MiddleRow },
 		{ "The back row. I can see my house from there.", BackRow } } );
 
+	self:playCharacterAnimation( "mad" );
 	self:showDialog( "This is not the time to tarry! Let us make haste to our seats. \n\nCome with me human!" );
 	self:fadeOut( 3 );
 end
 
 
 local LavaPit = function( self )
+	self:playCharacterAnimation( "happy" );
 	self:showDialog( "Good idea. If the children are slowly lowered into lava there is time to hear them scream." );
 	self:addPoints( 2 );
 end
@@ -266,6 +269,7 @@ local NotMakingFriends = function( self )
 	self:wait( 2 );
 	self:showDialog( "I am S'haur!" );
 	SayTheSpiel( self );
+	self:playCharacterAnimation( "sad" );
 	self:showDialog( "I'm not a friggin' vegetarian." )
 end
 
@@ -304,6 +308,7 @@ end
 
 local GottaGoFilm = function( self )
 	self:addPoints( 2 );
+	self:playCharacterAnimation( "idle" );
 	self:showDialog( "Yes, film is the only way to go." );
 	self:playCharacterAnimation( "mad" );
 	self:wait( 1 );
@@ -321,6 +326,7 @@ end
 
 
 local FilmTime = function( self )
+	self:playCharacterAnimation( "happy" );
 	self:showDialog( "I like to enfuse my shots with an aesthetically pleasing grain. The grain adds a tasteful extra dimension to a photo. It evokes a certain charm and personality which is otherwise lacking." );
 	self:showDialog( "It's also very important to shoot in natural light. All the fake Hollywood trickery you see nowadays ruins the purity of a shot." );
 	self:showChoice( "Do you have a favorite medium for picture taking?", { { "I prefer film.", GottaGoFilm },
@@ -349,20 +355,27 @@ local DevilSpiel = function( self )
 	self:setDialogSpeed( 16 );
 	self:showDialog( "He is Lucifer.", { ignoreInput = true }  );
 	self:setDialogSpeed( 19 );
+	self:playCharacterAnimation( "mad" );
 	self:showDialog( "Prince of Darkness.", { ignoreInput = true }  );
 	self:setDialogSpeed( 23 );
+	self:playCharacterAnimation( "shocked" );
 	self:showDialog( "Gatekeeper of the Great Below.", { ignoreInput = true } );
 	self:setDialogSpeed( 29 );
+	self:playCharacterAnimation( "idle" );
 	self:showDialog( "Father of Lies.", { ignoreInput = true } );
 	self:setDialogSpeed( 33 );
+	self:playCharacterAnimation( "mad" );
 	self:showDialog( "Lord of the Underworld.", { ignoreInput = true } );
 	self:setDialogSpeed( 37 );
+	self:playCharacterAnimation( "shocked" );
 	self:showDialog( "Inspiration of \"The Number of the Beast\".", { ignoreInput = true } );
 	self:setDialogSpeed( 40 );
+	self:playCharacterAnimation( "happy" );
 	self:showDialog( "Master Herbalist.", { ignoreInput = true } );
 	self:setDialogSpeed( 42 );
 	self:showDialog( "Source of all evil. That includes demons! He made my father's father, who made my father, who made me!", { ignoreInput = true } );
 	self:setDialogSpeed( 16 );
+	self:playCharacterAnimation( "mad" );
 	self:showDialog( "The Devil.", { wobbly = true } );
 	self:setDialogSpeed( 28 );
 end
@@ -518,6 +531,7 @@ local DinnerDate = function( self )
 			{ "Place the children into iron maidens.", IronMaiden } } );
 	end
 
+	self:playCharacterAnimation( "idle" );
 	self:showDialog( "What kind of base nourishment do they have at this establishment?" );
 	self:showChoice( "< He's sifting through the menu >", { { "Order his food for him.", StealOrder }, 
 		{ "Let him take his time.", TakeTime } } );
@@ -525,9 +539,10 @@ local DinnerDate = function( self )
 	self:showChoice( "< The waiter is looking at you >", { { "A steak please.", SteakingAClaim },
 		{ "I'm in a health mood. Give me salad.", SalAdd } } );
 
+	self:playCharacterAnimation( "idle" );
 	self:showDialog( "Meals are one of the few times of the day when I am not submerged in torture and suffering." );
 	self:showChoice( "< He's lost in thought >", { { "Do you have any non-torture hobbies?", HobbyMaybe },
-		{ "You know, your look fantastic in your profile picture.", ProfilePicDistraction } } );
+		{ "You know, you look fantastic in your profile picture.", ProfilePicDistraction } } );
 
 	self:playCharacterAnimation( "idle" );
 	self:showDialog( "We speak too much of Dae. I must hear more of you." );
@@ -546,6 +561,7 @@ local DinnerDate = function( self )
 		{ "Being with you is torturous.", YouTortureMe } } );
 
 	self:showDialog( "< The waiter gingerly places the check on the table >" );
+	self:playCharacterAnimation( "shocked" );
 	self:showDialog( "Our dinner is over already? Time moves quickly when a demon fraternizes with a mortal." );
 
 	if self.noMoMoney then
@@ -683,12 +699,13 @@ local ParkingLotDate = function( self )
 	self:playCharacterAnimation( "idle" );
 	self:setBackground( gAssets.BG.parking );
 	self:fadeIn( 3 );
+	self:playCharacterAnimation( "idle" );
 	self:showDialog( "Come, walk to my vehicle." );	
 	self:showChoice( "Time for intimacy.", { { "Wrap your arm around his warm fur.", ArmAround },
 		{ "Grab his hoof.", Handsies },
 		{ "Walk separately.", ThatIsLame } } );
 	self:wait( 2 );
-	if self:getPoints() >= 35 then
+	if self:getPoints() >= 43 then
 		self:playCharacterAnimation( "idle" );
 		self:showDialog( "Human, spending time with you has been..." );
 		self:showDialog( "Torturous", { wobbly = true } );
@@ -696,7 +713,7 @@ local ParkingLotDate = function( self )
 		self:wait( 1 );
 		self:playCharacterAnimation( "happy" );
 		self:showDialog( "...and maybe even a little bit fun." );
-	elseif self:getPoints() >= 15 then
+	elseif self:getPoints() >= 25 then
 		self:playCharacterAnimation( "idle" );
 		self:showDialog( "Human, this date has been moderately bearable." );
 		self:showDialog( "I was expecting boredom." );
@@ -704,12 +721,15 @@ local ParkingLotDate = function( self )
 		self:playCharacterAnimation( "idle" );
 		self:showDialog( "Human, I think we should get this business over with." );
 	end
+
+	self:playCharacterAnimation( "idle" );
 	self:showDialog( "< He's looking at you, as if he's expecting something >" );
 	self:showChoice( "Uhhhh uhhhhhhhhh....", { { "The date doesn't need to stop here. Wink Wink.", LetsContinue },
 			{ "I thank you for spending time with me Dae Son of Ez...", TheSpiel }, 
 			{ "Those lips are irresistible.", KissyKissy } } );
 
-	if self:getPoints() >= PointMax then
+	if self:getPoints() >= 56 then
+		self:playCharacterAnimation( "happy" );
 		self:showDialog( "I know your true purpose, mortal.\n\nYou are an exorcist.")
 		self:showDialog( "Despite your profession." );
 		self:showDialog( "Despite your disgusting human body." );
@@ -722,10 +742,12 @@ local ParkingLotDate = function( self )
 		self:showDialog( "But this moment is the happiest of all." );
 		self:showDialog( "Thank you for freeing me." );
 		self:setDialogSpeed( 6 );
+		self:playCharacterAnimation( "idle" );
 		self:showDialog( "EXORCIST", { ignoreInput = true, wobbly = true } );
 		self:wait( 2 );
 		PlayTransformation( self );
 	elseif self:getPoints() >= 25 then
+		self:playCharacterAnimation( "idle" );
 		self:showDialog( "I've figured out your true purpose, mortal.\n\nYou are an exorcist." );
 		self:showDialog( "Our night has had its rough patches, but I think you have granted me true happiness." );
 		self:showDialog( "It is time for me to go." );
@@ -738,9 +760,12 @@ end
 
 
 local KillFunction = function( self )
+	self:playCharacterAnimation( "mad" );
 	self:showDialog( "That's enough, I'm leaving, human. You have failed to woo me." );
+	self:playCharacterAnimation( "idle" );
 	self:showDialog( "This has not been fun, I hope we do not see each other again." );
 	self:setDialogSpeed( 4 );
+	self:playCharacterAnimation( "mad" );
 	self:showDialog( "GOODBYE", { wobbly = true, ignoreInput } );
 	self:fadeOut( 3 );
 	self:setCharacter();
