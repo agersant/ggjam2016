@@ -14,6 +14,7 @@ local ReportCard = function( self, tragicEnd )
 		success = rate > self.winRate;
 	end
 	self:playMusic( gAssets.MUSIC.narration );
+	self:setBackground( gAssets.BG.black );
 	self:showReport( success, rate );
 	self:setCharacter();
 	self:fadeIn( 1 );
@@ -37,7 +38,7 @@ local Hug = function( self )
 		self:setDialogSpeed( 8 );
 		self:playCharacterAnimation( "exit" );
 		self:showDialog( "Thank you so much!!!", { wobbly = true, ignoreInput = true, } );
-		self:wait( 7 );
+		self:wait( 5 );
 		self:fadeOut( 7 );
 	else
 		self:showDialog( "I don't think we're that close to each other. Could you like, keep your distances for the time being. Ok, please?" );
@@ -97,7 +98,7 @@ end
 local ParkingLot = function( self )
 	self:setBackground( gAssets.BG.parking );
 	self:playMusic( gAssets.MUSIC.parkingLot );
-	self:fadeIn( 2 );
+	self:fadeIn( 3 );
 	if self.gotMilk or self.quesadilla then
 		self:showDialog( "< Minnie-T looks very pale, it seems she isn't feeling well. >" );
 		self:wait( 1 );
@@ -120,6 +121,7 @@ end
 local AskHerSomething = function( self )
 	self:showDialog( "< Minnie-T keeps talking on and an about her friends and her hobbies. >" );
 	self:showDialog( "< You can barely say anything before the meal comes to an end. >" );
+	self:fadeOut( 5 );
 	ParkingLot( self );
 end
 
