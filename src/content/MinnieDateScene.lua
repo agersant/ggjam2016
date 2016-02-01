@@ -301,7 +301,7 @@ end
 
 local WatchMovie = function( self )
 	self:fadeOut( 2 );
-	self:setBackground( gAssets.BG.black );
+	self:setBackground( gAssets.BG.theater2 );
 	self:fadeIn( 1 );
 	self:showDialog( "< While the movie is playing, the people next to you start talking about how the lead actor's nose looks like a potato >" );
 	self:showChoice( "How will you react?", {
