@@ -40,6 +40,7 @@ Minnie.playExit = function( self )
 	self.portrait:setImage( gAssets.CHAR.minnie.hyped0 );
 	self.scene:wait( 5 );
 	self.portrait:setWobble( 0 );
+	self.portrait:setOffset( 480, 100 );
 	self.portrait:setImage( gAssets.CHAR.minnie.exit0 );
 end
 

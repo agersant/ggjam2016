@@ -6,7 +6,6 @@ local FinalScene = require( "src/content/FinalScene" );
 local MinnieDateScene = {};
 
 local ReportCard = function( self, tragicEnd )
-	self:fadeOut( 2 );
 	local success;
 	local rate = self:getPoints() / self.maxPoints;
 	if tragicEnd then
@@ -21,9 +20,8 @@ local ReportCard = function( self, tragicEnd )
 end
 
 local Hug = function( self )
-	-- local rate = self:getPoints() / self.maxPoints;
-	-- local success = rate > self.winRate;
-	local success = true;
+	local rate = self:getPoints() / self.maxPoints;
+	local success = rate > self.winRate;
 	if success then
 		self:showDialog( "< You feel the warmth and the smell of hur fur as you get close to her. >", { ignoreInput = true, } );
 		self:wait( 4 );
@@ -37,8 +35,8 @@ local Hug = function( self )
 		self:setDialogSpeed( 8 );
 		self:playCharacterAnimation( "exit" );
 		self:showDialog( "Thank you so much!!!", { wobbly = true, ignoreInput = true, } );
-		self:wait( 5 );
-		self:fadeOut( 5 );
+		self:wait( 7 );
+		self:fadeOut( 7 );
 	else
 		self:showDialog( "I don't think we're that close to each other. Could you like, keep your distances for the time being. Ok, please?" );
 		self:wait( 1 );
@@ -48,7 +46,8 @@ local Hug = function( self )
 end
 
 local GetGoing = function( self )
-	-- TODO lame ending
+	self:showDialog( "Thanks for the evening. I'll talk to you, like later." );
+	ReportCard( self, false );
 end
 
 local ListenAllDay = function( self )
@@ -56,7 +55,7 @@ local ListenAllDay = function( self )
 	self:playCharacterAnimation( "hyped" );
 	self:showDialog( "Awwwww! You're so nice.", { wobbly = true } );
 	self:playCharacterAnimation( "idle" );
-	self:showDialog( "It reminds me of that time when Jenny and I went to the gym and she spilled a coke latte on her couch, like all over him." );
+	self:showDialog( "It reminds me of that time when Jenny and I went to the gym and she spilled a coke latte on her couch, like all over him. It was so gross but the coach was so sweet about it. I heard from Stephen that the coach is really into organic food and indie Pop music so he like, eats a lot of quinoa and I heard quinoa makes people real chill." );
 	-- TODO more shit
 	self:showChoice( "Time for your true final move!", {
 		{ "Hug her.", Hug },
@@ -117,7 +116,8 @@ local ParkingLot = function( self )
 end
 
 local AskHerSomething = function( self )
-	self:showDialog( "TODO more stuff" );
+	self:showDialog( "< Minnie-T keeps talking on and an about her friends and her hobbies. >" );
+	self:showDialog( "< You can barely say anything before the meal comes to an end. >" );
 	ParkingLot( self );
 end
 
@@ -502,7 +502,7 @@ local TheaterDate = function( self )
 	self:setCharacter( Minnie );
 	self:playCharacterAnimation( "idle" );
 	self:fadeIn( 3 );
-	self:setIntroText( "Minnie-T" );
+	self:setIntroText( "Posh Greek Princess:\nMinnie-T" );
 	self:introTextFadeIn( 1 );
 	self:wait( 2 );
 	self:introTextFadeOut( 2 );
