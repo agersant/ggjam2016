@@ -564,7 +564,7 @@ end
 
 MinnieDateScene.new = function()
 	local scene = Scene.new( PlayNarration );
-	scene.maxPoints = 25;
+	scene.maxPoints = 30;
 	scene.winRate = .7;
 	scene.kill = FailMinnie;
 	return scene;
