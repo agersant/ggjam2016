@@ -1,4 +1,4 @@
-local PointMax = 63;
+local PointMax = 67;
 
 local Scene = require( "src/Scene" );
 local MinnieDateScene = require( "src/content/MinnieDateScene" );
@@ -162,7 +162,7 @@ local TheaterDate = function( self )
 	--self:playMusic( gAssets.MUSIC.theaterLobby );
 	self:playCharacterAnimation( "idle" );
 	self:fadeIn( 3 );
-	self:setIntroText( "King of the Seventh Circle of Hell: Dae’mwe S’haur" );
+	self:setIntroText( "King of the Seventh Circle of Hell:\nDae’mwe S’haur" );
 	self:introTextFadeIn( 5 );
 	self:introTextFadeOut( 5 );
 
@@ -194,6 +194,8 @@ local TheaterDate = function( self )
 		{ "Puppy Love", SetMovieAnswer( 1 ) },
 		{ "Happy Laughing Children not in Pain", SetMovieAnswer( 2 ) } } );
 	self:showDialog( "Interesting choice." );
+
+	self:playCharacterAnimation( "mad" );
 	self:showDialog( "These simpletons are charging a king's ransom for small confectionaries!\n\nI should punish them with hellfire!" );
 	self:showChoice( "< He seems hungry >", { { "Spend all your money on popcorn.", BuyTheManFood }, 
 		{ "Spend all your money on a drink.", BuyTheManFood },
@@ -640,15 +642,15 @@ local PlayTransformation = function ( self )
 	self:playCharacterAnimation( "exit" );
 	self:fadeOut( 8 );
 
-	self:playNarration( "WELL DONE EXORCIST!" );
-	self:playNarration( "YOU HAVE FREED A SOUL FROM ETERNAL IMPRISONMENT" );
+	self:showNarration( "WELL DONE EXORCIST!" );
+	self:showNarration( "YOU HAVE FREED A SOUL FROM ETERNAL IMPRISONMENT" );
 	self:setDialogSpeed( 6 );
-	self:playNarration( "GOAT JOB", { wobbly = true } );
-	self:playNarration( "I GUESS THAT WAS A BIT OF A STRETCH" );
-	self:playNarration( "WHAT DO YOU WANT FROM ME, I'M A DISEMBODIED VOICE" );
+	self:showNarration( "GOAT JOB", { wobbly = true } );
+	self:showNarration( "I GUESS THAT WAS A BIT OF A STRETCH" );
+	self:showNarration( "WHAT DO YOU WANT FROM ME, I'M A DISEMBODIED VOICE" );
 	self:setDialogSpeed( 6 );
-	self:playNarration( "JERK", { wobbly = true } );
-	self:showReport( true, math.floor( ( ( self:getPoints() / PointMax ) * 100 ) / 100 ) );
+	self:showNarration( "JERK", { wobbly = true } );
+	self:showReport( true, self:getPoints() / PointMax );
 	self:waitForMainInput();
 	ChangeScene( MinnieDateScene.new() );
 end
@@ -734,7 +736,7 @@ local KillFunction = function( self )
 	self:setDialogSpeed();
 	self:showNarration( "ANYWAYS..." );
 	self:showNarration( "I HOPE IT GOES BETTER NEXT TIME" );
-	self:showReport( true, math.floor( ( ( self:getPoints() / PointMax ) * 100 ) / 100 ) )
+	self:showReport( false, self:getPoints() / PointMax )
 	self:waitForMainInput();
 	ChangeScene( MinnieDateScene.new() );
 end

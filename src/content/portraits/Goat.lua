@@ -9,8 +9,8 @@ Goat.new = function( scene, portrait )
 end
 
 Goat.playAnimation = function( self, animationName )
-	self.portrait:setOffset( 780, 0 );
-	self.portrait:setFXPosition( 230, 250 );
+	self.portrait:setOffset( 900, -100 );
+	self.portrait:setFXPosition( 400, 320 );
 	if animationName == "exit" then
 		return self:playExit();
 	elseif animationName == "happy" then
