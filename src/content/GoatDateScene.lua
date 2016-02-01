@@ -7,6 +7,17 @@ local Goat = require( "src/content/portraits/Goat" );
 local GoatDateScene = {};
 
 
+local GetPercentage = function( self )
+	local points = self:getPoints();
+	if points <= 25 then
+		return points / 50;
+	else
+		local adjustedPoints = 51 + ( ( 100 - 51 ) / ( PointMax - 26 ) ) * ( points - 26 );
+		return adjustedPoints / 100;
+	end
+end
+
+
 local PlayNarration = function( self )
 	self:playMusic( gAssets.MUSIC.narration );
 	self:setBackground( gAssets.BG.black );
@@ -538,7 +549,7 @@ local DinnerDate = function( self )
 	self:showDialog( "Our dinner is over already? Time moves quickly when a demon fraternizes with a mortal." );
 
 	if self.noMoMoney then
-		self:showChoice( "You could pay for the bill, if you didn't spend all your money on concessions.", 
+		self:showChoice( "You could pay, but you spent all your money on concessions.", 
 			{ { "I have no money, let's run!", BookIt },
 			{ "I have no money, can you cover me?", LetHimPay } } );
 	else
@@ -655,7 +666,7 @@ local PlayTransformation = function ( self )
 	self:showNarration( "WHAT DO YOU WANT FROM ME, I'M A DISEMBODIED VOICE" );
 	self:setDialogSpeed( 6 );
 	self:showNarration( "JERK", { wobbly = true } );
-	self:showReport( true, self:getPoints() / PointMax );
+	self:showReport( true, GetPercentage( self ) );
 	self:waitForMainInput();
 	ChangeScene( MinnieDateScene.new() );
 end
@@ -691,8 +702,6 @@ local ParkingLotDate = function( self )
 	self:showChoice( "Uhhhh uhhhhhhhhh....", { { "The date doesn't need to stop here. Wink Wink.", LetsContinue },
 			{ "I thank you for spending time with me Dae Son of Ez...", TheSpiel }, 
 			{ "Those lips are irresistible.", KissyKissy } } );
-
-	print( self:getPoints() );
 
 	if self:getPoints() >= PointMax then
 		self:showDialog( "I know your true purpose, mortal.\n\nYou are an exorcist.")
@@ -742,7 +751,7 @@ local KillFunction = function( self )
 	self:setDialogSpeed();
 	self:showNarration( "ANYWAYS..." );
 	self:showNarration( "I HOPE IT GOES BETTER NEXT TIME" );
-	self:showReport( false, self:getPoints() / PointMax );
+	self:showReport( false, GetPercentage( self ) );
 	self:waitForMainInput();
 	ChangeScene( MinnieDateScene.new() );
 end
