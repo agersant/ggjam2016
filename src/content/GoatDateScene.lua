@@ -652,6 +652,12 @@ local PlayTransformation = function ( self )
 	self:wait( 0.02 );
 	self:playCharacterAnimation( "happy" );
 	self:wait( 0.01 ); 
+	for i = 0, 15 do
+		self:playCharacterAnimation( "idle" );
+		self:wait( 0.04 );
+		self:playCharacterAnimation( "happy" );
+		self:wait( 0.04 ); 
+	end		
 	self:playCharacterAnimation( "exit" );
 	self:fadeOut( 8 );
 	self:setCharacter();
