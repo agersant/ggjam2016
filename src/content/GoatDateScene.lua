@@ -751,11 +751,10 @@ end
 local run = function( self )
 	self.kill = KillFunction;
 	self:setCharacter( Goat );
-	--PlayNarration( self );
-	--self:stopMusic( gAssets.MUSIC.narration );
-	--PresentGoatDatingProfile( self );
-	--TheaterDate( self );
-	self.movieChoice = 0;
+	PlayNarration( self );
+	self:stopMusic( gAssets.MUSIC.narration );
+	PresentGoatDatingProfile( self );
+	TheaterDate( self );
 	DinnerDate( self );
 	self:addPoints( 10000 );
 	ParkingLotDate( self );
