@@ -14,6 +14,8 @@ local run = function( self )
 	self:wait( 1 );
 	self:setNarrationSpeed();
 	self:showNarration( "Thank you for playing Love, Lust, Lucifer!" );
+	self:wait( 1 );
+	self:showNarration( "Antoine Gersant\nCody Malach\nAleksandar Krstikj\nMatthew Woodle\nOmar Gatica\nDevin was there too" );
 	while true do
 		self:waitFrame();
 	end
