@@ -201,7 +201,7 @@ local TheaterDate = function( self )
 		end
 	end
 
-	self.movieChoice = self:showChoice( "<He's staring at movie posters>", { 
+	self.movieChoice = self:showChoice( "< He's staring at movie posters >", { 
 		{ "Cherub my Back and I'll Rub Yours", SetMovieAnswer( 0 ) },
 		{ "Puppy Love", SetMovieAnswer( 1 ) },
 		{ "Happy Laughing Children not in Pain", SetMovieAnswer( 2 ) } } );
@@ -547,7 +547,7 @@ local DinnerDate = function( self )
 	self:playCharacterAnimation( "idle" );
 	self:showDialog( "We speak too much of Dae. I must hear more of you." );
 	self:showDialog( "Do you have a good relationship with your father?" );
-	self:showChoice( "< He's looking at you, but also not?", { { "We're very close. He's actually waiting in my car right now.", CloseFather }, 
+	self:showChoice( "< He's looking at you, but also not? >", { { "We're very close. He's actually waiting in my car right now.", CloseFather }, 
 		{ "I like my dad. He's a pretty cool guy.", LikeDad },
 		{ "I could take him or leave him.", NoDadPlease } } );
 

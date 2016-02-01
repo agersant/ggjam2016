@@ -26,7 +26,7 @@ local Hug = function( self )
 	local rate = self:getPoints() / self.maxPoints;
 	local success = rate > self.winRate;
 	if success then
-		self:showDialog( "< You feel the warmth and the smell of hur fur as you get close to her. >", { ignoreInput = true, } );
+		self:showDialog( "< You feel the warmth and the smell of her fur as you get close to her. >", { ignoreInput = true, } );
 		self:wait( 4 );
 		self:showDialog( "< In a way, this is almost romantic. >", { ignoreInput = true, } );
 		self:wait( 4 );
