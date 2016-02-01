@@ -14,6 +14,7 @@ local ReportCard = function( self, tragicEnd )
 		success = rate > self.winRate;
 	end
 	self:showReport( success, rate );
+	self:setCharacter();
 	self:fadeIn( 1 );
 	self:waitForMainInput();
 	ChangeScene( FinalScene.new() );

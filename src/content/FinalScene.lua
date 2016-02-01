@@ -4,7 +4,7 @@ local FinalScene = {};
 
 
 local run = function( self )
-	
+	self:setCharacter();
 	self:setBackground( gAssets.BG.black );
 	self:fadeIn( 1 );
 	self:setNarrationSpeed( 15 );
