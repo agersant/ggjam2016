@@ -94,6 +94,7 @@ love.load = function()
 	gAssets.MUSIC.narration = love.audio.newSource( "assets/music/Narration.mp3" );
 	gAssets.MUSIC.parkingLot = love.audio.newSource( "assets/music/ParkingLot.mp3" );
 	gAssets.MUSIC.dinner = love.audio.newSource( "assets/music/Dinner.mp3" );
+	gAssets.MUSIC.theater = love.audio.newSource( "assets/music/Theater.mp3" );
 end
 
 love.update = function( dt )

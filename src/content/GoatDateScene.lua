@@ -158,6 +158,7 @@ end
 
 
 local TheaterDate = function( self )
+	self:playMusic( gAssets.MUSIC.theater );
 	self:setBackground( gAssets.BG.theater );
 	--self:playMusic( gAssets.MUSIC.theaterLobby );
 	self:playCharacterAnimation( "idle" );
