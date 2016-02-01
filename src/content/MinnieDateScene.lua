@@ -269,7 +269,7 @@ local IgnoreThem = function( self )
 	self:wait( 2 );
 	self:playCharacterAnimation( "idle" );
 	self:showDialog( "O M G! You guys have like, no idea what you're talking about." );
-	self:showDialog( "If you think Joey Pellagio has a nose like a potato, well you should look at Samantha Flutter more closely. Her nose is like, twice that size. 6_6" );
+	self:showDialog( "If you think Joey Pellagio has a nose like a potato, well you should look at Samantha Flutter more closely. Her nose is like, twice that size." );
 	self:wait( .5 );
 	self:playCharacterAnimation( "angry" );
 	self:wait( .5 );
@@ -295,7 +295,7 @@ local BeQuiet = function( self )
 	self:showDialog( "<You ask the other spectators to be quiet.>" );
 	self:wait( .5 );
 	self:showDialog( "Thanks, these guys were like, so annoying." );
-	self:showDialog( "Joey Pellagio doesn't even have a big nose, :^O lol! They have no idea what they're talking about." );
+	self:showDialog( "Joey Pellagio doesn't even have a big nose, lol! They have no idea what they're talking about." );
 	self:showDialog( "< You watch the rest of the movie in peace >" );
 end
 
@@ -351,7 +351,7 @@ local BeefJerky = function( self )
 	self:showDialog( "Eeeeew.", { ignoreInput = true, } );
 	self:wait( 2 );
 	self:setDialogSpeed();
-	self:showDialog( "Beef jerky is like so gross. >:-[", { wobbly = true } );
+	self:showDialog( "Beef jerky is like so gross.", { wobbly = true } );
 	self:showDialog( "People who eat it are like, totally the worst. Why would you do that? It's like if a cabbage was eating sun-dried tomatoes? Wouldn't that be weird? I don't know, it just grosses me out." );
 	self:showDialog( "I used to eat meat, but I was always like, totally disgusted by it." );
 	self:showDialog( "My friend Matt says that when he becomes like King President of the country he'll make meat illegal. But I don't think he'll remember it, because he's like so forgetful. He even forgot where he parked his car at the mall once, lol!" );
@@ -364,7 +364,7 @@ local Milkshakes = function( self )
 	self:showDialog( "Milkshakes? Wow, that's totally kinky." );
 	self:showDialog( "But it's good, I like it!", { wobbly = true } );
 	self:showDialog( "I didn't really expect you to make things move so quickly between us, but I guess, uh, you know me already!" );
-	self:showDialog( "It reminds me of how my friend Jenny always knows the best latte every season at StairBux. She's like totally a PSYCHIC. Once she told me I'd be cold wearing shorts and then I totally was. She's magical. O_o" );
+	self:showDialog( "It reminds me of how my friend Jenny always knows the best latte every season at StairBux. She's like totally a PSYCHIC. Once she told me I'd be cold wearing shorts and then I totally was. She's magical." );
 	self:wait( 1 );
 	self:showDialog( "< You seem to have brought this girl to the yard >" );
 end
@@ -378,7 +378,7 @@ local NoJunkFood = function( self )
 	self:showDialog( "Have you noticed how food seems to taste better when you're really hungry? Sometimes I try to eat grass with my mouth at a weird angle so it will all go into the same stomach and then later I can fill the other ones with tofu tacos." );
 	self:setDialogSpeed( 36 );
 	self:playCharacterAnimation( "idle" );
-	self:showDialog( "Then the tofu tacos are like so delicious I can't stop eating them. (<) . . . It's kinda like that time when my friend Robert took Jenny, Jessica, Patty and I to the aquarium and Jessy wouldn't stop eating those carrot dumpling enchiladas." );
+	self:showDialog( "Then the tofu tacos are like so delicious I can't stop eating them. It's kinda like that time when my friend Robert took Jenny, Jessica, Patty and I to the aquarium and Jessy wouldn't stop eating those carrot dumpling enchiladas." );
 	self:setDialogSpeed( 45 );
 	self:showDialog( "She ate so many that her face became a tomato. Have you ever eaten so much food that your face becomes a weird color? It happens to her like all the time. It's totally weird but like, in a way that's not creepy. Whatever.", { ignoreInput = true } );
 	self:setDialogSpeed();
@@ -410,7 +410,7 @@ local Brisket = function( self )
 	self:playCharacterAnimation( "sad" );
 	self:showDialog( "I didn't think you would say that." );
 	self:playCharacterAnimation( "angry" );
-	self:showDialog( "Maybe my friend Amanda was right and I shouldn't have come to this date. You're like, so disappointing. T_T" );
+	self:showDialog( "Maybe my friend Amanda was right and I shouldn't have come to this date. You're like, so disappointing." );
 	self:playCharacterAnimation( "idle" );
 	self:showDialog( "Whatever." );
 end
@@ -421,7 +421,7 @@ local Beach = function( self )
 	self:showDialog( "OMG! OMG! We have like so much in common! I'm a huuuuuuuge beach person, like really. My friend Stephen once told my friend Jessica that he saw my friend Jennifer at the beach once, and since I wasn't there she was totally freaking out, as if." );
 	self:playCharacterAnimation( "happy" );
 	self:setDialogSpeed( 36 );
-	self:showDialog( "So he was like, \"What the duck?\". :S And she totally kept going for ages. Like how the beach isn't really the beach if I'm not there because I'm like, the main event. She was like so mad. So Stephen told my friend Jerry that Jenny was nuts. And you know what she did?" );
+	self:showDialog( "So he was like, \"What the duck?\". And she totally kept going for ages. Like how the beach isn't really the beach if I'm not there because I'm like, the main event. She was like so mad. So Stephen told my friend Jerry that Jenny was nuts. And you know what she did?" );
 	self:setDialogSpeed( 50 );
 	self:showDialog( "She like totally threw a starfish at him! :/\\ As if. I don't know why she would even pick up a starfish in the first place, duh, they're so gross. And they have like a million legs. They better not skip leg day like Stephen always does.", { ignoreInput = true } );
 	self:setDialogSpeed( 60 );
@@ -454,7 +454,7 @@ local RentMusicVideos = function( self )
 	self:playCharacterAnimation( "happy" );
 	self:addPoints( 4 );
 	self:showDialog( "O M G!! Really? That is just like me! I watch music videos all day when I should be helping customers at the store. I'm a big fan of Jigsawchain Puzzle Records and Atomium Organic Sound System. And my friends love them too!" );
-	self:showDialog( "They're so haaawt! Like I can't stop listening!! (|^_^|)" );
+	self:showDialog( "They're so haaawt! Like I can't stop listening!" );
 	self:playCharacterAnimation( "idle" );
 end
 
@@ -478,7 +478,7 @@ end
 
 local IntroducesHerself = function( self )
 	self:playCharacterAnimation( "idle" );
-	self:showDialog( "So yeah. My name is Minnie Crete :->, but my friends call me Minnie-T, so I guess you can call me Minnie-T. I guess. I work in my dad's VHS rental store." );
+	self:showDialog( "So yeah. My name is Minnie Crete, but my friends call me Minnie-T, so I guess you can call me Minnie-T. I guess. I work in my dad's VHS rental store." );
 	self:showDialog( "My dad doesn't JUST own the VHS store lol. He's super rich so he owns like half the town. This theater is totally his also." );
 	self:wait( .5 );
 	self:showChoice( "< She looks very proud >", {
