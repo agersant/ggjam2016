@@ -13,6 +13,7 @@ local ReportCard = function( self, tragicEnd )
 	else
 		success = rate > self.winRate;
 	end
+	self:playMusic( gAssets.MUSIC.narration );
 	self:showReport( success, rate );
 	self:setCharacter();
 	self:fadeIn( 1 );
@@ -230,6 +231,7 @@ local PostMovie = function( self )
 	end
 	self:fadeOut( 2 );
 	self:setBackground( gAssets.BG.dinner );
+	self:playMusic( gAssets.MUSIC.dinner );
 	self:fadeIn( 2 );
 	self:playCharacterAnimation( "happy" );
 	self:showDialog( "So like, what did you think of the movie?" );
@@ -499,7 +501,7 @@ end
 
 local TheaterDate = function( self )
 	self:setBackground( gAssets.BG.theater );
-	--self:playMusic( gAssets.MUSIC.theaterLobby );
+	self:playMusic( gAssets.MUSIC.theater );
 	self:setCharacter( Minnie );
 	self:playCharacterAnimation( "idle" );
 	self:fadeIn( 3 );
