@@ -51,8 +51,12 @@ Portrait.setCharacter = function( self, character )
 	self.offset = { x = 0, y = 0, };
 	self.fxPosition = { x = 0, y = 0, };
 	self:stopAnimation();
-	self.character = character.new( self.scene, self );
-	assert( self.character.playAnimation );
+	if character then
+		self.character = character.new( self.scene, self );
+		assert( self.character.playAnimation );
+	else
+		self.character = nil;
+	end
 end
 
 Portrait.playAnimation = function( self, animationName )
