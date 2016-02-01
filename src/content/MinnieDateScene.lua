@@ -76,8 +76,8 @@ local SorryLonely = function( self )
 	self:playCharacterAnimation( "idle" );
 	self:wait( 1 );
 	self:showChoice( "Time for your final move", {
-		{ "Hug her.", Hug },
 		{ "It's late I think we should get going.", GetGoing },
+		{ "Hug her.", Hug },
 		{ "I could listen to you all day", ListenAllDay },
 	} );
 end
@@ -243,8 +243,8 @@ local PostMovie = function( self )
 	self:playCharacterAnimation( "idle" );
 	local choices = {};
 	if self.movie == "tacos" then
-		table.insert( choices, { "I loved it, I'm a big fan of martial arts and tacos.", LoveTacos } );
 		table.insert( choices, { "I loved it, it shows the power of friendship is invincible.", PowerFriendship } );
+		table.insert( choices, { "I loved it, I'm a big fan of martial arts and tacos.", LoveTacos } );
 	end
 	if self.movie == "alone" then
 		table.insert( choices, { "I loved it, it really makes you think about friendship.", PowerFriendship } );
@@ -305,8 +305,8 @@ local WatchMovie = function( self )
 	self:fadeIn( 1 );
 	self:showDialog( "< While the movie is playing, the people next to you start talking about how the lead actor's nose looks like a potato >" );
 	self:showChoice( "How will you react?", {
-		{ "Ignore them.", IgnoreThem },
 		{ "Politely ask them to be quiet.", BeQuiet },
+		{ "Ignore them.", IgnoreThem },
 		{ "Kick their popcorn over and scream at them to leave the theater.", PleaseLeave },
 	} );
 	PostMovie( self );
@@ -389,9 +389,9 @@ local Concessions = function( self )
 	self:wait( 1 );
 	self:showDialog( "I'm like so hungry right now. We should totally get something to eat for the movie. I need to keep all these stomachs busy you know." );
 	self:showChoice( "What will you do?", {
+		{ "We should save room for the restaurant.", NoJunkFood },
 		{ "Offer to buy beef jerky.", BeefJerky },
 		{ "Offer to buy milkshakes.", Milkshakes },
-		{ "We should save room for the restaurant.", NoJunkFood },
 	} );
 	PickMovie( self );
 end
@@ -516,8 +516,8 @@ local TheaterDate = function( self )
 	self:playCharacterAnimation( "happy" );
 	self:showDialog( "Nice to meet you!", { wobbly = true } );
 	self:showChoice( "< She looks energetic >", {
-		{ "Nice to meet you too!", NiceToMeetYou },
 		{ "Yeah, you never know with online dates.", NeverKnow },
+		{ "Nice to meet you too!", NiceToMeetYou },
 	} );
 end
 

@@ -13,7 +13,7 @@ local run = function( self )
 	self:showNarration( "Another day in the endless war against and demons comes to its end, thanks to the power of love." );
 	self:wait( 1 );
 	self:setNarrationSpeed();
-	self:showNarration( "Thank you for playing Love, Live, Lucifer!" );
+	self:showNarration( "Thank you for playing Love, Lust, Lucifer!" );
 	while true do
 		self:waitFrame();
 	end
