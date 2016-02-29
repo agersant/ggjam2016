@@ -47,7 +47,7 @@ local ConfirmProfile;
 ConfirmProfile = function( self )
 	self:waitForMainInput();
 	self:showChoice( "Did you memorize the key information about your date?", {
-		{ "I'll take another look", ConfirmProfile },
+		{ "I'll take another look.", ConfirmProfile },
 		{ "I'm ready to go!", function( self ) end },
 	} );
 end
@@ -556,7 +556,7 @@ local DinnerDate = function( self )
 	self:setDialogSpeed( 12 );
 	self:showDialog( "\nDo you think I'm good enough?", { wobbly = true } );
 	self:setDialogSpeed();
-	self:showChoice( "Uh oh", { { "You are good enough.", GoodEnough }, 
+	self:showChoice( "Uh oh...", { { "You are good enough.", GoodEnough }, 
 		{ "You make me feel happy and safe.", HappyAndSafe },
 		{ "Being with you is torturous.", YouTortureMe } } );
 
@@ -708,8 +708,8 @@ local ParkingLotDate = function( self )
 	if self:getPoints() >= 43 then
 		self:playCharacterAnimation( "idle" );
 		self:showDialog( "Human, spending time with you has been..." );
-		self:showDialog( "Torturous", { wobbly = true } );
-		self:showDialog( "Horribly painful", { wobbly = true } );
+		self:showDialog( "Torturous.", { wobbly = true } );
+		self:showDialog( "Horribly painful.", { wobbly = true } );
 		self:wait( 1 );
 		self:playCharacterAnimation( "happy" );
 		self:showDialog( "...and maybe even a little bit fun." );
